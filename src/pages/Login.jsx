@@ -7,10 +7,10 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [redirect, setRedirect] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem('mealsToken', '');
-    localStorage.setItem('cocktailsToken', '');
-  }, [])
+  // useEffect(() => {
+  //   localStorage.setItem('mealsToken', null);
+  //   localStorage.setItem('cocktailsToken', null);
+  // }, [])
 
   const disabledStatus = () => {
     const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
