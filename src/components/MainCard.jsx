@@ -12,7 +12,7 @@ class MainCard extends React.Component {
 
     return (
       <div data-testid={`${index}-recipe-card`}>
-        <img src={image} data-testid={`${index}-card-img`} />
+        <img src={image} data-testid={`${index}-card-img`} alt="Card" />
         <p data-testid={`${index}-card-name`}>{name}</p>
       </div>
     );

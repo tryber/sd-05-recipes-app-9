@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import BottomMenu from '../components/BottomMenu';
-import { fetchMeals, fetchDrinks } from '../services/api';
+import { fetchMeals } from '../services/api';
 
 class RecipesMainScreen extends React.Component {
   constructor(props) {
@@ -10,13 +10,12 @@ class RecipesMainScreen extends React.Component {
   }
 
   componentDidMount() {
-    fetchMeals('s', '').then(meals => console.log(meals));
+    fetchMeals('s', '').then((meals) => console.log(meals));
   }
 
   render() {
     return (
       <div>
-
         <BottomMenu />
       </div>
     );
