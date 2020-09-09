@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+
+
+const disabledStatus = (email, senha) => {
+  const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
+  if (senha.length > 5 && valido !== null) return false;
+  return true;
+};
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -7,24 +14,13 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [redirect, setRedirect] = useState(false);
 
-  // useEffect(() => {
-  //   localStorage.setItem('mealsToken', null);
-  //   localStorage.setItem('cocktailsToken', null);
-  // }, [])
-
-  const disabledStatus = () => {
-    const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
-    if (senha.length > 5 && valido !== null) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }
+  // const handleChangeEmail = () => {};
+  // const handleChangeSenha() = () => {};
 
   const handleChange = ({ target }) => {
     if (target.name === 'email') setEmail(target.value);
     if (target.name === 'senha') setSenha(target.value);
-    disabledStatus();
+    setDisabled(disabledStatus(email, senha));
   };
 
   const clickHandler = () => {
@@ -33,7 +29,7 @@ const Login = () => {
     const user = { email };
     localStorage.setItem('user', JSON.stringify(user));
     setRedirect(true);
-  }
+  };
 
   if (redirect) return <Redirect to="/comidas" />;
 
@@ -61,6 +57,6 @@ const Login = () => {
       >Entrar</button>
     </div>
   );
-}
+};
 
 export default Login;

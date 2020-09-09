@@ -2,7 +2,7 @@
 const INITIAL_STATE = {
   data: [],
   loading: false,
-}
+};
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
