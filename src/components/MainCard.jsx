@@ -8,20 +8,19 @@ class MainCard extends React.Component {
   }
 
   render() {
-    const { name, image, index } = this.props;
+    const { recipes, index } = this.props;
 
     return (
-      <div data-testid={`${index}-recipe-card`}>
-        <img src={image} data-testid={`${index}-card-img`} alt="Card" />
-        <p data-testid={`${index}-card-name`}>{name}</p>
+      <div data-testid={`${index}-recipe-card`} className="card">
+        <img src={recipes.strMealThumb || recipes.strDrinkThumb} data-testid={`${index}-card-img`} alt="Card" />
+        <p data-testid={`${index}-card-name`}>{recipes.strMeal || recipes.strDrink}</p>
       </div>
     );
   }
 }
 
 MainCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  meal: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 };
 

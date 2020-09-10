@@ -1,8 +1,9 @@
 export const SAVE_RECIPES = 'SAVE_RECIPES';
 
-export function saveRecipes(meals) {
+export function saveRecipes(meals, drinks) {
   return {
     type: SAVE_RECIPES,
     meals,
+    drinks,
   };
 }

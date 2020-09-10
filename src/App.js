@@ -8,7 +8,8 @@ function App() {
   return (
     <div id="meals">
       <Switch>
-        <Route path="/comidas" component={RecipesMainScreen} />
+        <Route path="/comidas" render={(props) => <RecipesMainScreen {...props} />} />
+        <Route path="/bebidas" render={(props) => <RecipesMainScreen {...props} />} />
         <Route exact path="/" component={Login} />
       </Switch>
     </div>
