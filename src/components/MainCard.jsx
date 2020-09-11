@@ -20,7 +20,7 @@ class MainCard extends React.Component {
 }
 
 MainCard.propTypes = {
-  meal: PropTypes.object.isRequired,
+  recipes: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 };
 

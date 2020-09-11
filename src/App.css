@@ -1,6 +1,7 @@
 
 #meals {
-  width: 400px;
+  width: 360px;
+  /* height: 540px; */
   background: rgb(179, 177, 177);
   font-family: sans-serif;
   color: black;
@@ -29,6 +30,11 @@
 }
 
 .card img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
+}
+
+.menu {
+  position: fixed;
+  bottom: 0;
 }
