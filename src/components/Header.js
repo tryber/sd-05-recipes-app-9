@@ -16,36 +16,44 @@ const handleClick = (setFetchType, setInitFetch, radio, input, pathname) => {
 
 const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
   setFetchType, setInitFetch, radio, pathname) => (
-    <div>
+    <div className="search">
       <input
         type="text" value={input}
         onChange={(event) => handleChangeInput(event.target.value)}
         name="search-input" data-testid="search-input"
       />
-      <div>
-        <input
-          type="radio" name="radiocheck" id="ingrediente"
-          data-testid="ingredient-search-radio" value="ingrediente"
-          onChange={(event) => handleChangeRadio(event.target.value)}
-        />
-        <label htmlFor="ingrediente">Ingrediente</label>
-        <input
-          type="radio" name="radiocheck" value="nome" id="Nome" data-testid="name-search-radio"
-          onChange={(event) => handleChangeRadio(event.target.value)}
-        />
-        <label htmlFor="Nome">Nome</label>
-        <input
-          type="radio" name="radiocheck" value="first" id="first"
-          data-testid="first-letter-search-radio"
-          onChange={(event) => handleChangeRadio(event.target.value)}
-        />
-        <label htmlFor="first">Primeira letra</label>
-        <button
-          data-testid="exec-search-btn"
-          onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
-        >
-          Filtrar
-        </button>
+      <div className="radiosAndFilterButton">
+        <div className="ingrediente">
+          <input
+            type="radio" name="radiocheck" id="ingrediente"
+            data-testid="ingredient-search-radio" value="ingrediente"
+            onChange={(event) => handleChangeRadio(event.target.value)}
+          />
+          <label htmlFor="ingrediente">Ingrediente</label>
+        </div>
+        <div className="nome">
+          <input
+            type="radio" name="radiocheck" value="nome" id="Nome" data-testid="name-search-radio"
+            onChange={(event) => handleChangeRadio(event.target.value)}
+          />
+          <label htmlFor="Nome">Nome</label>
+        </div>
+        <div className="first">
+          <input
+            type="radio" name="radiocheck" value="first" id="first"
+            data-testid="first-letter-search-radio"
+            onChange={(event) => handleChangeRadio(event.target.value)}
+          />
+          <label htmlFor="first">Primeira letra</label>
+        </div>
+      </div>
+      <div className="execButton">
+      <button
+        data-testid="exec-search-btn"
+        onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
+      >
+        Filtrar
+      </button>
       </div>
     </div>
 );
@@ -137,23 +145,26 @@ const Header = (props) => {
 
   if (redirect) return (<Redirect to={pathRedirect} />);
   return (
-    <div className="topo">
-      <button data-testid="profile-top-btn" onClick={() => handleProfileClick()}>
-        <img src={profileIcon} alt="Perfil" />
-      </button>
+    <div>
+      <div className="topo">
+        <button
+          className="profileButton" data-testid="profile-top-btn"
+          onClick={() => handleProfileClick()}
+        >
+          <img src={profileIcon} alt="Perfil" />
+        </button>
 
-      <span data-testid="page-title">{titlePage(props)}</span>
+        <span data-testid="page-title"><h1>{titlePage(props)}</h1></span>
 
-      <button
-        data-testid="search-top-btn" onClick={() => toogleClickedSearch()}
-        className={(isVisible) ? 'searchButtonVisible' : 'searchButtonNotVisible'}
-      >
-        {/* ref1 */}
-        <img src={searchIcon} alt="Pesquisar" />
-      </button>
-
+        <button
+          data-testid="search-top-btn" onClick={() => toogleClickedSearch()}
+          className={(isVisible) ? 'searchButtonVisible' : 'searchButtonNotVisible'}
+        >
+          {/* ref1 */}
+          <img src={searchIcon} alt="Pesquisar" />
+        </button>
+      </div>
       {(clickedSearch) && <SearchItens props={props} />}
-
     </div>
   );
 };
