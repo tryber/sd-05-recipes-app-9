@@ -1,13 +1,13 @@
-input[ type = 'text' ] {
+.search-input {
   font-size: 18px;
   height: 30px;
 }
 
-input[ type = 'radio' ] {
+.withoutSelector {
   transform: scale(1.3);
 }
 
-input[ type = 'radio' ]:hover , label {
+.withoutSelector:hover , label {
   cursor: pointer;
 }
 

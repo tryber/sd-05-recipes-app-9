@@ -20,12 +20,12 @@ const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
       <input
         type="text" value={input}
         onChange={(event) => handleChangeInput(event.target.value)}
-        name="search-input" data-testid="search-input"
+        name="search-input" data-testid="search-input" className="search-input"
       />
       <div className="radiosAndFilterButton">
         <div className="ingrediente">
           <input
-            type="radio" name="radiocheck" id="ingrediente"
+            type="radio" name="radiocheck" id="ingrediente" className="withoutSelector"
             data-testid="ingredient-search-radio" value="ingrediente"
             onChange={(event) => handleChangeRadio(event.target.value)}
           />
@@ -34,26 +34,26 @@ const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
         <div className="nome">
           <input
             type="radio" name="radiocheck" value="nome" id="Nome" data-testid="name-search-radio"
-            onChange={(event) => handleChangeRadio(event.target.value)}
+            onChange={(event) => handleChangeRadio(event.target.value)} className="withoutSeletor"
           />
           <label htmlFor="Nome">Nome</label>
         </div>
         <div className="first">
           <input
             type="radio" name="radiocheck" value="first" id="first"
-            data-testid="first-letter-search-radio"
+            data-testid="first-letter-search-radio" className="withoutSeletor"
             onChange={(event) => handleChangeRadio(event.target.value)}
           />
           <label htmlFor="first">Primeira letra</label>
         </div>
       </div>
       <div className="execButton">
-      <button
-        data-testid="exec-search-btn"
-        onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
-      >
-        Filtrar
-      </button>
+        <button
+          data-testid="exec-search-btn"
+          onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
+        >
+          Filtrar
+        </button>
       </div>
     </div>
 );

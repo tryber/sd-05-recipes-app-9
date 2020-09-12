@@ -1,4 +1,4 @@
-import { fetchMeals, fetchDrinks, fetchIngredientsMeals, fetchIngredientsDrinks} from '../services/api';
+import { fetchMeals, fetchDrinks, fetchIngredientsMeals, fetchIngredientsDrinks } from '../services/api';
 
 export const REQUEST_DATA = 'REQUEST_DATA';
 export const RECEIVE_DATA_MEALS = 'RECEIVE_DATA_MEALS';
@@ -11,34 +11,33 @@ function requestData() {
     type: REQUEST_DATA,
   };
 }
-
-const receiveDataMeals = (data) => {
+function receiveDataMeals(data) {
   return {
     type: RECEIVE_DATA_MEALS,
     data,
   };
-};
+}
 
-const receiveDataDrinks = (data) => {
+function receiveDataDrinks(data) {
   return {
     type: RECEIVE_DATA_DRINKS,
     data,
   };
-};
+}
 
-const receiveDataIngredientsMeal = (data) => {
+function receiveDataIngredientsMeal(data) {
   return {
     type: RECEIVE_DATA_INGREDIENTS_MEAL,
     data,
   };
-};
+}
 
-const receiveDataIngredientsDrink = (data) => {
+function receiveDataIngredientsDrink(data) {
   return {
     type: RECEIVE_DATA_INGREDIENTS_DRINK,
     data,
   };
-};
+}
 
 export function fetchMealsThunk(tipo, input) {
   return (dispatch) => {

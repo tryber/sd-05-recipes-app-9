@@ -20,5 +20,5 @@ export function fetchIngredientsDrinks(input) {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`;
   return fetch(URL)
     .then((response) => response.text()
-    .then((data) => (data === "") ? null : JSON.parse(data)));
+    .then((data) => (data === '') ? null : JSON.parse(data)));
 }
