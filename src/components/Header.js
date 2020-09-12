@@ -1,40 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import './Header.css';
 import { fetchMealsThunk, fetchDrinksThunk, fetchIngredientsMealThunk, fetchIngredientsDrinkThunk } from '../actions/index';
+import './Header.css';
 
-const inputsSearchItens = (input, handleChangeInput, handleChangeRadio, handleClick) => (
-  <div>
-    <input
-      type="text" value={input}
-      onChange={(event) => handleChangeInput(event.target.value)}
-      name="search-input" data-testid="search-input"
-    />
+const handleClick = (setFetchType, setInitFetch, radio, input, pathname) => {
+  setFetchType(pathname.includes('comidas'));
+  if (radio === '' || input === '') return alert('Gentileza preencher os campos antes de filtrar!');
+  if (radio === 'first' && input.length > 1) return alert('Gentileza digitar apenas uma letra para pesquisar por letra!');
+  return setInitFetch(true);
+};
+
+const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
+  setFetchType, setInitFetch, radio, pathname) => (
     <div>
       <input
-        type="radio" name="radiocheck" id="ingrediente"
-        data-testid="ingredient-search-radio" value="ingrediente"
-        onChange={(event) => handleChangeRadio(event.target.value)}
+        type="text" value={input}
+        onChange={(event) => handleChangeInput(event.target.value)}
+        name="search-input" data-testid="search-input"
       />
-      <label htmlFor="ingrediente">Ingrediente</label>
-      <input
-        type="radio" name="radiocheck" value="nome" id="Nome" data-testid="name-search-radio"
-        onChange={(event) => handleChangeRadio(event.target.value)}
-      />
-      <label htmlFor="Nome">Nome</label>
-      <input
-        type="radio" name="radiocheck" value="first" id="first"
-        data-testid="first-letter-search-radio"
-        onChange={(event) => handleChangeRadio(event.target.value)}
-      />
-      <label htmlFor="first">Primeira letra</label>
-      <button data-testid="exec-search-btn" onClick={() => handleClick()}>Filtrar</button>
+      <div>
+        <input
+          type="radio" name="radiocheck" id="ingrediente"
+          data-testid="ingredient-search-radio" value="ingrediente"
+          onChange={(event) => handleChangeRadio(event.target.value)}
+        />
+        <label htmlFor="ingrediente">Ingrediente</label>
+        <input
+          type="radio" name="radiocheck" value="nome" id="Nome" data-testid="name-search-radio"
+          onChange={(event) => handleChangeRadio(event.target.value)}
+        />
+        <label htmlFor="Nome">Nome</label>
+        <input
+          type="radio" name="radiocheck" value="first" id="first"
+          data-testid="first-letter-search-radio"
+          onChange={(event) => handleChangeRadio(event.target.value)}
+        />
+        <label htmlFor="first">Primeira letra</label>
+        <button
+          data-testid="exec-search-btn"
+          onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
+        >
+          Filtrar
+        </button>
+      </div>
     </div>
-  </div>
 );
+
 const SearchItens = (props) => {
   const [input, setInput] = useState('');
   const [radio, setRadio] = useState('');
@@ -44,17 +59,10 @@ const SearchItens = (props) => {
   const [pathRedirect, setPathRedirect] = useState('');
   const loading = useSelector((state) => state.reducerHeader.loading);
   const dados = useSelector((state) => state.reducerHeader.data);
-  console.log(dados);
   const { location: { pathname } } = props.props;
   const tipo = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
-  const handleClick = () => {
-    setFetchType(pathname.includes('comidas'));
-    if (radio === '' || input === '') return alert('Gentileza preencher os campos antes de filtrar!');
-    if (radio === 'first' && input.length > 1) return alert('Gentileza digitar apenas uma letra para pesquisar por letra!');
-    return setInitFetch(true);
-  };
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (initFetch === true) {
       let request;
@@ -85,7 +93,8 @@ const SearchItens = (props) => {
   const handleChangeRadio = (param) => setRadio(param);
 
   if (redirect) return (<Redirect to={pathRedirect} />);
-  return inputsSearchItens(input, handleChangeInput, handleChangeRadio, handleClick);
+  return inputsSearchItens(input, handleChangeInput, handleChangeRadio,
+    setFetchType, setInitFetch, radio, pathname);
 };
 
 const visibilitySearchButton = (props) => {
@@ -152,3 +161,7 @@ const Header = (props) => {
 export default Header;
 
 //  ref1: https://www.w3schools.com/cssref/pr_class_visibility.asp
+
+SearchItens.propTypes = {
+  props: PropTypes.node.isRequired,
+};
