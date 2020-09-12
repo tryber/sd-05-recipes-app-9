@@ -11,7 +11,14 @@ export function fetchDrinks(tipo, input) {
   return fetch(URL).then((data) => data.json());
 }
 
-export function fetchIngredients(input) {
+export function fetchIngredientsMeals(input) {
   const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`;
   return fetch(URL).then((data) => data.json());
+}
+
+export function fetchIngredientsDrinks(input) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`;
+  return fetch(URL)
+    .then((response) => response.text()
+    .then((data) => (data === "") ? null : JSON.parse(data)));
 }

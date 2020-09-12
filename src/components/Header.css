@@ -1,0 +1,7 @@
+.searchButtonVisible {
+  visibility: visible;
+}
+
+.searchButtonNotVisible {
+  visibility: hidden;
+}
