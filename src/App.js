@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/bebidas" component={Header} />
+        <Route exact path="/comidas" component={Header} />
         {/* <Route exact path="/comidas" component={Comidas} /> */}
       </Switch>
     </BrowserRouter>

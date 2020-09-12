@@ -65,8 +65,10 @@ const SearchItens = (props) => {
   const [initFetch, setInitFetch] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [pathRedirect, setPathRedirect] = useState('');
-  const loading = useSelector((state) => state.reducerHeader.loading);
-  const dados = useSelector((state) => state.reducerHeader.data);
+  const loadingMeals = useSelector((state) => state.reducerHeaderMeals.loading);
+  const loadingDrinks = useSelector((state) => state.reducerHeaderDrinks.loading);
+  const dadosDrinks = useSelector((state) => state.reducerHeaderDrinks.data);
+  const dadosMeals = useSelector((state) => state.reducerHeaderMeals.data);
   const { location: { pathname } } = props.props;
   const tipo = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
   const dispatch = useDispatch();
@@ -86,16 +88,17 @@ const SearchItens = (props) => {
   }, [initFetch, fetchType, dispatch, input, radio]);
 
   useEffect(() => {
-    if (loading === false && dados.length === 0) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    if (loading === false && dados.length === 1 && tipo === 'comidas') {
-      setPathRedirect(`/comidas/${dados[0].idMeal}`);
+    if (loadingDrinks === false && dadosDrinks.length === 0) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    if (loadingMeals === false && dadosMeals.length === 0) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    if (loadingMeals === false && dadosMeals.length === 1 && tipo === 'comidas') {
+      setPathRedirect(`/comidas/${dadosMeals[0].idMeal}`);
       setRedirect(true);
     }
-    if (loading === false && dados.length === 1 && tipo === 'bebidas') {
-      setPathRedirect(`/bebidas/${dados[0].idDrink}`);
+    if (loadingDrinks === false && dadosDrinks.length === 1 && tipo === 'bebidas') {
+      setPathRedirect(`/bebidas/${dadosDrinks[0].idDrink}`);
       setRedirect(true);
     }
-  }, [loading, dados, tipo]);
+  }, [loadingMeals, loadingDrinks, dadosMeals, dadosDrinks, tipo]);
 
   const handleChangeInput = (param) => setInput(param);
   const handleChangeRadio = (param) => setRadio(param);

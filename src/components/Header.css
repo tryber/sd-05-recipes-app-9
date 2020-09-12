@@ -7,12 +7,13 @@
   transform: scale(1.3);
 }
 
-.withoutSelector:hover , label {
+.withoutSelector:hover  {
   cursor: pointer;
 }
 
 label {
   margin-left: 3px;
+  cursor: pointer;
 }
 
 button {

@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import reducer from './reducer';
-import reducerHeader from './reducerHeader';
+import reducerHeaderDrinks from './reducerHeaderDrinks';
+import reducerHeaderMeals from './reducerHeaderMeals';
 
 const rootReducers = combineReducers({
-  reducer, reducerHeader,
+  reducer, reducerHeaderDrinks, reducerHeaderMeals,
 });
 
 export default rootReducers;
