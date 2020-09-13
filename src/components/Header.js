@@ -174,8 +174,9 @@ const Header = (props) => {
 
 export default Header;
 
-//  ref1: https://www.w3schools.com/cssref/pr_class_visibility.asp
-
 SearchItens.propTypes = {
-  props: PropTypes.node.isRequired,
+  props: PropTypes.objectOf(PropTypes.object).isRequired, //  ref2
 };
+
+//  ref1: https://www.w3schools.com/cssref/pr_class_visibility.asp
+//  ref2: https://pt-br.reactjs.org/docs/typechecking-with-proptypes.html
