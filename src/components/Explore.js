@@ -7,12 +7,12 @@ const Explore = () => {
   const [pathRedirect, setPathRedirect] = useState('');
 
   const onClickFood = () => {
-    setPathRedirect('/comidas');
+    setPathRedirect('/explorar/comidas');
     setRedirect(true);
   };
 
   const onClickDrinks = () => {
-    setPathRedirect('/bebidas');
+    setPathRedirect('/explorar/bebidas');
     setRedirect(true);
   };
 
