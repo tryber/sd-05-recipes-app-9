@@ -27,3 +27,15 @@ export function fetchIngredientsDrinks(input) {
       return JSON.parse(data);
     }));
 }
+
+export function randomFood() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  return fetch(URL)
+    .then((data) => data.json());
+}
+
+export function randomDrink() {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  return fetch(URL)
+    .then((data) => data.json());
+}

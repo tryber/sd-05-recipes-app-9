@@ -126,7 +126,7 @@ const titlePage = (props) => {
     '/receitas-feitas': 'Receitas Feitas',
     '/receitas-favoritas': 'Receitas Favoritas',
     '/explorar': 'Explorar',
-    'explorar/comidas': 'Explorar Comidas',
+    '/explorar/comidas': 'Explorar Comidas',
     '/explorar/bebidas': 'Explorar Bebidas',
     '/explorar/comidas/ingredientes': 'Explorar ingredientes',
     '/explorar/bebidas/ingredientes': 'Explorar ingredientes',
