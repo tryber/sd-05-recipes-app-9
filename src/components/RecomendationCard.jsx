@@ -1,5 +1,4 @@
 import React from 'react';
-import './recomendations.css';
 
 const RecomendationCard = ({ data }) => {
   const { imagem, title, category } = data;
