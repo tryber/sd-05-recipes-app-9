@@ -6,6 +6,7 @@ import { fetchMeals, fetchDrinks } from '../services/api';
 import { saveRecipes } from '../actions';
 import MainCard from '../components/MainCard';
 import CategoriesFilter from '../components/CategoriesFilter';
+import Header from '../components/Header';
 
 async function fetchData(dispatch, setIsLoading) {
   setIsLoading(true);
@@ -63,19 +64,26 @@ export default function RecipesMainScreen(props) {
     fetchData(dispatch, setIsLoading);
   }, [dispatch]);
   const { match } = props;
+  const headerMeals = useSelector((state) => state.reducerHeaderMeals.data);
+  const headerDrinks = useSelector((state) => state.reducerHeaderDrinks.data);
   return (
     <div className="main-container">
+      <Header props={props} />
       <CategoriesFilter match={match} />
       <div className="cards">
         {!isLoading &&
-          match.path === '/comidas' ?
-            <RenderMeals match={match} /> :
-            false
+          match.path === '/comidas' &&
+          ((headerMeals.length > 0) ?
+          headerMeals.map((meal, index) =>
+            <MainCard index={index} recipe={meal} key={meal.strMeal} match={match.path} />) :
+          <RenderMeals match={match} />)
         }
         {!isLoading &&
-          match.path === '/bebidas' ?
-            <RenderDrinks match={match} /> :
-            false
+          match.path === '/bebidas' &&
+          ((headerDrinks.length > 0) ?
+          headerDrinks.map((drink, index) =>
+            <MainCard index={index} recipe={drink} key={drink.strDrink} match={match.path} />) :
+          <RenderDrinks match={match} />)
         }
         {isLoading && <p>Loading...</p>}
       </div>

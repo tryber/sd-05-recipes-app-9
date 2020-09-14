@@ -19,8 +19,8 @@ function fetchData(match, category, dispatch) {
 }
 
 function verifyFetch(match, event, categoriesFetched, dispatch) {
-  return fetchData(match, event.target.name, dispatch) && !categoriesFetched.filter((cat) =>
-    cat.category === event.target.name).length > 0;
+  return !categoriesFetched.filter((cat) =>
+  cat.category === event.target.name).length > 0 && fetchData(match, event.target.name, dispatch);
 }
 
 export default function CategoryButton(props) {

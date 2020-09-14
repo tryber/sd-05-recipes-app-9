@@ -10,7 +10,7 @@ import './Header.css';
 const handleClick = (setFetchType, setInitFetch, radio, input, pathname) => {
   setFetchType(pathname.includes('comidas'));
   if (radio === '' || input === '') return alert('Gentileza preencher os campos antes de filtrar!');
-  if (radio === 'first' && input.length > 1) return alert('Gentileza digitar apenas uma letra para pesquisar por letra!');
+  if (radio === 'first' && input.length > 1) return alert('Sua busca deve conter somente 1 (um) caracter');
   return setInitFetch(true);
 };
 
@@ -151,21 +151,22 @@ const Header = (props) => {
     <div>
       <div className="topo">
         <button
-          className="profileButton" data-testid="profile-top-btn"
+          className="profileButton"
           onClick={handleProfileClick}
         >
-          <img src={profileIcon} alt="Perfil" />
+          <img src={profileIcon} alt="Perfil" data-testid="profile-top-btn" />
         </button>
 
-        <span data-testid="page-title"><h1>{titlePage(props.props)}</h1></span>
+        <span><h1 data-testid="page-title">{titlePage(props.props)}</h1></span>
 
-        <button
-          data-testid="search-top-btn" onClick={toogleClickedSearch}
-          className={(isVisible) ? 'searchButtonVisible' : 'searchButtonNotVisible'}
-        >
-          {/* ref1 */}
-          <img src={searchIcon} alt="Pesquisar" />
-        </button>
+        {isVisible &&
+          <button
+            onClick={toogleClickedSearch}
+          >
+            {/* ref1 */}
+            <img src={searchIcon} alt="Pesquisar" data-testid="search-top-btn" />
+          </button>
+        }
       </div>
       {(clickedSearch) && <SearchItens props={props} />}
     </div>
