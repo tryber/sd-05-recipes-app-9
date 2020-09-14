@@ -39,7 +39,7 @@ const storeFavorites = (favoritado, recipe) => {
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe.localStorage;
   let receitasFavoritas = localStorage.getItem('favoriteRecipes');
 
-  if (receitasFavoritas !== undefined || receitasFavoritas !== null) {
+  if (receitasFavoritas !== undefined && receitasFavoritas !== '') {
     receitasFavoritas = JSON.parse(receitasFavoritas);
   }
 
@@ -68,9 +68,13 @@ const storeFavorites = (favoritado, recipe) => {
 };
 
 const favoriteChecker = (id, setFavoritado) => {
-  const receitasFavoritas = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const receitaNoLocalStorage = receitasFavoritas.find((receita) => receita.id === id);
-  if (receitaNoLocalStorage) setFavoritado(true);
+  let receitasFavoritas = localStorage.getItem('favoriteRecipes');
+  console.log(receitasFavoritas)
+  if (receitasFavoritas !== undefined && receitasFavoritas !== '') {
+    receitasFavoritas = JSON.parse(receitasFavoritas);
+    const receitaNoLocalStorage = receitasFavoritas.find((receita) => receita.id === id);
+    if (receitaNoLocalStorage) setFavoritado(true);
+  }
 };
 
 const RecipeDetails = (props) => {

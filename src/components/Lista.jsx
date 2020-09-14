@@ -20,7 +20,7 @@ const Lista = ({ data }) => {
 };
 
 Lista.propTypes = {
-  data: PropTypes.instanceof(Object).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Lista;
