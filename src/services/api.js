@@ -13,7 +13,7 @@ export function fetchDrinks(tipo, input) {
 
 export function fetchCategories(route) {
   let URL;
-  switch(route) {
+  switch (route) {
     case "/comidas":
       URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
       break;
@@ -28,7 +28,7 @@ export function fetchCategories(route) {
 
 export function fetchRecipesByCategory(route, categoryName) {
   let URL;
-  switch(route) {
+  switch (route) {
     case "/comidas":
       URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`;
       break;
@@ -38,6 +38,6 @@ export function fetchRecipesByCategory(route, categoryName) {
     default:
       URL = '';
   }
-  
+
   return fetch(URL).then(data => data.json());
 }

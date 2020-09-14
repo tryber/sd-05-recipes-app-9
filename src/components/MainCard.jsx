@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class MainCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { recipes, index } = this.props;
-
+    const { recipe, index, match } = this.props;
     return (
-      <div data-testid={`${index}-recipe-card`} className="card">
-        <img src={recipes.strMealThumb || recipes.strDrinkThumb} data-testid={`${index}-card-img`} alt="Card" />
-        <p data-testid={`${index}-card-name`}>{recipes.strMeal || recipes.strDrink}</p>
-      </div>
+      <Link to={`${match}/${recipe.idMeal || recipe.idDrink}`}>
+        <div data-testid={`${index}-recipe-card`} className="card">
+          <img src={recipe.strMealThumb || recipe.strDrinkThumb} data-testid={`${index}-card-img`} alt="Card" />
+          <p data-testid={`${index}-card-name`}>{recipe.strMeal || recipe.strDrink}</p>
+        </div>
+      </Link>
     );
   }
 }
 
 MainCard.propTypes = {
-  recipes: PropTypes.object.isRequired,
+  recipe: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
+  match: PropTypes.string.isRequired,
 };
 
 export default MainCard;
