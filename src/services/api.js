@@ -38,6 +38,34 @@ export function fetchRecipesByCategory(route, categoryName) {
     default:
       URL = '';
   }
-
   return fetch(URL).then((data) => data.json());
+}
+
+export function fetchIngredientsMeals(input) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${input}`;
+  return fetch(URL).then((data) => data.json());
+}
+
+export function fetchIngredientsDrinks(input) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`;
+  return fetch(URL)
+    .then((response) => response.text()
+    .then((data) => {
+      if (data === '') {
+        return null;
+      }
+      return JSON.parse(data);
+    }));
+}
+
+export function randomFood() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  return fetch(URL)
+    .then((data) => data.json());
+}
+
+export function randomDrink() {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  return fetch(URL)
+    .then((data) => data.json());
 }

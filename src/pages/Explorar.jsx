@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
+import Explore from '../components/Explore';
 
-function Comidas(props) {
+function Explorar(props) {
   return (
     <div>
       <Header props={props} />
-      <div> Comidas blah</div>
+      <Explore />
     </div>
   );
 }
 
-export default Comidas;
+export default Explorar;
