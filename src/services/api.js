@@ -11,6 +11,15 @@ export function fetchDrinks(tipo, input) {
   return fetch(URL).then((data) => data.json());
 }
 
+export function fetchDetails(type, id) {
+  const URLComida = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const URLBebida = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+
+  if (type === 'comidas') {
+    return fetch(URLComida).then((response) => (response.json()));
+  }
+  return fetch(URLBebida).then((response) => (response.json()));
+  
 export function fetchCategories(route) {
   let URL;
   switch (route) {

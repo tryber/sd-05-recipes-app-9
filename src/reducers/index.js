@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import detailsFetch from './detailsFetch';
+import recomendation from './recomendation';
 import recipesReducer from './recipesReducer';
 import categoriesReducer from './categoriesReducer';
 import reducerHeaderDrinks from './reducerHeaderDrinks';
@@ -9,6 +11,8 @@ const rootReducers = combineReducers({
   categoriesReducer,
   reducerHeaderDrinks,
   reducerHeaderMeals,
+  detailsFetch,
+  recomendation,
 });
 
 export default rootReducers;
