@@ -12,8 +12,9 @@ function App() {
   return (
     <div id="meals">
       <Switch>
+        <Route path="/comidas" render={(props) => <RecipesMainScreen {...props} />} />
+        <Route path="/bebidas" render={(props) => <RecipesMainScreen {...props} />} />
         <Route exact path="/explorar" render={(props) => <Explorar {...props} />} />
-        <Route path="/comidas" component={RecipesMainScreen} />
         <Route exact path="/explorar/comidas" render={(props) => <ExploreFood {...props} />} />
         <Route exact path="/explorar/bebidas" render={(props) => <ExploreDrink {...props} />} />
         <Route exact path="/" component={Login} />
