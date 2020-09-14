@@ -14,30 +14,30 @@ export function fetchDrinks(tipo, input) {
 export function fetchCategories(route) {
   let URL;
   switch (route) {
-    case "/comidas":
+    case '/comidas':
       URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
       break;
-    case "/bebidas":
+    case '/bebidas':
       URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
       break;
     default:
       URL = '';
   }
-  return fetch(URL).then(data => data.json());
+  return fetch(URL).then((data) => data.json());
 }
 
 export function fetchRecipesByCategory(route, categoryName) {
   let URL;
   switch (route) {
-    case "/comidas":
+    case '/comidas':
       URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`;
       break;
-    case "/bebidas":
+    case '/bebidas':
       URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categoryName}`;
       break;
     default:
       URL = '';
   }
 
-  return fetch(URL).then(data => data.json());
+  return fetch(URL).then((data) => data.json());
 }

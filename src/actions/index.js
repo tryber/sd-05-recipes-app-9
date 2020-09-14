@@ -17,7 +17,7 @@ export function saveCategories(categories) {
   return {
     type: SAVE_CATEGORIES,
     categories,
-  }
+  };
 }
 
 export function setCategoriesFilter(category, recipes) {
@@ -25,25 +25,25 @@ export function setCategoriesFilter(category, recipes) {
     type: SET_RECIPES_BY_CATEGORY,
     category,
     recipes,
-  }
+  };
 }
 
 export function selectCategory(selectedCategory) {
   return {
     type: SELECTED_CATEGORY,
     selectedCategory,
-  }
+  };
 }
 
 export function loadingCategoryRecipes(isLoading) {
   return {
     type: LOADING_CATEGORY_RECIPES,
     isLoading,
-  }
+  };
 }
 
 export function resetCategories() {
   return {
     type: RESET_CATEGORIES,
-  }
+  };
 }

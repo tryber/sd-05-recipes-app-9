@@ -17,7 +17,7 @@ class MainCard extends React.Component {
 }
 
 MainCard.propTypes = {
-  recipe: PropTypes.object.isRequired,
+  recipe: PropTypes.objectOf(PropTypes.any).isRequired,
   index: PropTypes.number.isRequired,
   match: PropTypes.string.isRequired,
 };
