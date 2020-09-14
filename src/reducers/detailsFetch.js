@@ -69,7 +69,7 @@ function recipeDetails(state = INICIAL_STATE, action) {
       {
         const agradandoAoCC = agradoAoCC(action.recipe);
         return { carregando: false, recipe: recipeMapper(action.recipe, agradandoAoCC) };
-      };
+      }
     case CARREGANDO:
       return { ...state, carregando: true };
     default:
