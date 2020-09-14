@@ -118,5 +118,5 @@ export function fetchIngredientsDrinkThunk(tipo) {
     dispatch(requestData());
     return (fetchIngredientsDrinks(tipo))
       .then((json) => dispatch(receiveDataIngredientsDrink(json)));
-  }
+  };
 }
