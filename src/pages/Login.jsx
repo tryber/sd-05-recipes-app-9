@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-
 
 const disabledStatus = (email, senha) => {
   const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
@@ -14,13 +13,13 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [redirect, setRedirect] = useState(false);
 
-  // const handleChangeEmail = () => {};
-  // const handleChangeSenha() = () => {};
+  useEffect(() => {
+    setDisabled(disabledStatus(email, senha));
+  }, [email, senha]); //  ref1
 
   const handleChange = ({ target }) => {
     if (target.name === 'email') setEmail(target.value);
     if (target.name === 'senha') setSenha(target.value);
-    setDisabled(disabledStatus(email, senha));
   };
 
   const clickHandler = () => {

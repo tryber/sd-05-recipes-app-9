@@ -3,13 +3,16 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import RecipesMainScreen from './pages/RecipesMainScreen';
 import Login from './pages/Login';
+import RecipeDetails from './pages/RecipeDetails';
+import Teste from './components/TesteTelaReceitaEmProgresso';
 
 function App() {
   return (
-    <div id="meals">
+    <div>
       <Switch>
-        <Route path="/comidas" component={RecipesMainScreen} />
         <Route exact path="/" component={Login} />
+        <Route exact path="/comidas/52771" component={RecipeDetails} />
+        <Route path="/in-progress" component={Teste} />
       </Switch>
     </div>
   );
