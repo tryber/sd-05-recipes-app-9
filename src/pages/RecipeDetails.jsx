@@ -10,6 +10,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import Recomendations from '../components/Recomendations';
 import { recipeRecomendationsThunk } from '../actions/recomendations';
+import './RecipeDetails.css';
 
 const copy = require('clipboard-copy');
 
@@ -69,8 +70,7 @@ const storeFavorites = (favoritado, recipe) => {
 
 const favoriteChecker = (id, setFavoritado) => {
   let receitasFavoritas = localStorage.getItem('favoriteRecipes');
-  console.log(receitasFavoritas)
-  if (receitasFavoritas !== undefined && receitasFavoritas !== '') {
+  if (receitasFavoritas) {
     receitasFavoritas = JSON.parse(receitasFavoritas);
     const receitaNoLocalStorage = receitasFavoritas.find((receita) => receita.id === id);
     if (receitaNoLocalStorage) setFavoritado(true);
@@ -100,27 +100,30 @@ const RecipeDetails = (props) => {
   return (
     <div>
       <img data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
-      <h1>{drinkOrFood}</h1>
-      <h2>{category}</h2>
+      <h1 data-testid="recipe-title">{drinkOrFood}</h1>
+      <h2 data-testid="recipe-category">{category}</h2>
       {(ingredientData) && <Lista data={ingredientData} />}
-      <button data-testid="share-btn" id="share-btn" onClick={() => copyText(pathname)} >
-        <img src={shareIcon} alt="share" />
+      <button id="share-btn" onClick={() => copyText(pathname)} >
+        <img data-testid="share-btn" src={shareIcon} alt="share" />
       </button>
       <button
-        data-testid="favorite-btn"
         onClick={() => {
           toggleTrueFalse(favoritado, setFavoritado);
           storeFavorites(favoritado, recipe);
         }}
       >
-        <img src={favoritado ? blackHeartIcon : whiteHeartIcon} alt="love" />
+        <img
+          data-testid="favorite-btn"
+          src={favoritado ? blackHeartIcon : whiteHeartIcon} alt="love"
+        />
       </button>
       <p data-testid="instructions" >{instructions}</p>
       {(video) && videoEmbeder(video)}
       <Recomendations />
       <button
+        className="start-recipe-btn"
         data-testid="start-recipe-btn"
-        style={{ position: 'fixed-bottom' }}
+        // style={{ position: 'fixed-bottom' }}
         onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
       >Começar a receita</button>
     </div>

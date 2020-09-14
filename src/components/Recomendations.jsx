@@ -7,7 +7,8 @@ const Recomendations = ({ receitas, loading }) => {
   if (loading) return <div>Loading</div>;
   return (
     <div className="wrapper" >
-      {receitas.map((card) => (<RecomendationCard key={card.title} data={card} />))}
+      {receitas.map((card, index) =>
+        (<RecomendationCard key={card.title} data={card} index={index} />))}
     </div>
   );
 };
