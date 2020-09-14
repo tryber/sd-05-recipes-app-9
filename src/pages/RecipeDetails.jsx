@@ -11,6 +11,8 @@ import shareIcon from '../images/shareIcon.svg';
 import Recomendations from '../components/Recomendations';
 import { recipeRecomendationsThunk } from '../actions/recomendations';
 
+const copy = require('clipboard-copy');
+
 const onCoTo = (pathname) => {
   const caminhos = pathname.split('/');
   return ({
@@ -28,7 +30,6 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
 );
 
 const copyText = (pathname) => {
-  const copy = require('clipboard-copy');
   const link = `http://localhost:3000${pathname}`;
   document.getElementById('share-btn').innerText = 'Link copiado!';
   copy(link);
@@ -130,6 +131,7 @@ const mapStateToProps = (state) => ({
 RecipeDetails.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
   loading: PropTypes.bool.isRequired,
-}
+  location: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default connect(mapStateToProps)(RecipeDetails);

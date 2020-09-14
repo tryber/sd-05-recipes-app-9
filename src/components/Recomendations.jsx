@@ -18,8 +18,8 @@ const mapStateToProps = (state) => ({
 });
 
 Recomendations.propTypes = {
-  loading: PropTypes.bool,
-  receitas: PropTypes.instanceOf(Object),
-}
+  loading: PropTypes.bool.isRequired,
+  receitas: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default connect(mapStateToProps)(Recomendations);
