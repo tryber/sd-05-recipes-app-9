@@ -18,14 +18,14 @@ const cardAdapter = (receitas) => {
 };
 
 function recomendations(state = INICIAL_STATE, action) {
-  switch(action.type) {
+  switch (action.type) {
     case RECOMENDATION_CARREGANDO:
-      return {...state, carregando: true };
+      return { ...state, carregando: true };
     case RECOMENDATION_SUCESSO:
       return { carregando: false, recomendations: cardAdapter(action.recipe) };
     default:
       return state;
   }
-};
+}
 
 export default recomendations;

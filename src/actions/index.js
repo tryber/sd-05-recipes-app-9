@@ -6,4 +6,4 @@ export function saveRecipes(meals) {
     type: SAVE_RECIPES,
     meals,
   };
-};
+}

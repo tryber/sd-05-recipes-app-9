@@ -29,7 +29,7 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
 const copyText = (pathname) => {
   const copy = require('clipboard-copy');
   const link = `http://localhost:3000${pathname}`;
-  document.getElementById('share-btn').innerText='Link copiado!'
+  document.getElementById('share-btn').innerText = 'Link copiado!';
   copy(link);
 };
 
@@ -37,7 +37,7 @@ const storeFavorites = (favoritado, recipe) => {
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe.localStorage;
   let receitasFavoritas = localStorage.getItem('favoriteRecipes');
 
-  if (receitasFavoritas !== undefined || receitasFavoritas !== null ) {
+  if (receitasFavoritas !== undefined || receitasFavoritas !== null) {
     receitasFavoritas = JSON.parse(receitasFavoritas);
   }
 
@@ -63,13 +63,13 @@ const storeFavorites = (favoritado, recipe) => {
   }
 
   return localStorage.setItem('favoriteRecipes', JSON.stringify([novaReceita]));
-}
+};
 
 const favoriteChecker = (id, setFavoritado) => {
   const receitasFavoritas = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const receitaNoLocalStorage = receitasFavoritas.find((receita) => receita.id === id);
   if (receitaNoLocalStorage) setFavoritado(true);
-}
+};
 
 const RecipeDetails = (props) => {
   const { recipe, location: { pathname } } = props;
@@ -88,12 +88,12 @@ const RecipeDetails = (props) => {
     dispatch(receitaDetalhada);
   }, [dispatch, pathname]);
 
-  if (props.loading) return <p>Loading</p>
+  if (props.loading) return <p>Loading</p>;
   if (redirectProgresso) return <Redirect to={`${pathname}/in-progress`} />;
 
-  return(
+  return (
     <div>
-      <img data-testid="recipe-photo" src={recipeThumb} style={{width: "100%"}} alt="receita" />
+      <img data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
       <h1>{drinkOrFood}</h1>
       <h2>{category}</h2>
       {(ingredientData) && <Lista data={ingredientData} />}
@@ -102,7 +102,7 @@ const RecipeDetails = (props) => {
       </button>
       <button
         data-testid="favorite-btn"
-        onClick={() => { 
+        onClick={() => {
           toggleTrueFalse(favoritado, setFavoritado);
           storeFavorites(favoritado, recipe);
         }}
@@ -114,7 +114,7 @@ const RecipeDetails = (props) => {
       <Recomendations />
       <button
         data-testid="start-recipe-btn"
-        style={{ position: 'fixed-bottom', }}
+        style={{ position: 'fixed-bottom' }}
         onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
       >Começar a receita</button>
     </div>

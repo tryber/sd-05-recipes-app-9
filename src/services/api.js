@@ -17,7 +17,6 @@ export function fetchDetails(type, id) {
 
   if (type === 'comidas') {
     return fetch(URLComida).then((response) => (response.json()));
-  } else {
-    return fetch(URLBebida).then((response) => (response.json()));
   }
+  return fetch(URLBebida).then((response) => (response.json()));
 }
