@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { recipeDetailsThunk } from '../actions/recipeDetails';
 import Lista from '../components/Lista';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -125,5 +126,10 @@ const mapStateToProps = (state) => ({
   recipe: state.detailsFetch.recipe,
   loading: state.detailsFetch.carregando,
 });
+
+RecipeDetails.propTypes = {
+  recipe: PropTypes.instanceOf(Object).isRequired,
+  loading: PropTypes.bool.isRequired,
+}
 
 export default connect(mapStateToProps)(RecipeDetails);

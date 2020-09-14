@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Lista = ({ data }) => {
   const { ingredients, measures } = data;
@@ -17,5 +18,9 @@ const Lista = ({ data }) => {
     </ul>
   );
 };
+
+Lista.propTypes = {
+  data: PropTypes.instanceof(Object).isRequired,
+}
 
 export default Lista;

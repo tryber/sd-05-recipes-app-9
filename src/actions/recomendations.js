@@ -21,7 +21,7 @@ export function recipeRecomendationsThunk(tipo) {
     dispatch(carregando());
     if (tipo === 'comidas') {
       return fetchDrinks('s', '').then((r) => dispatch(sucesso(r)));
-    } 
+    }
     return fetchMeals('s', '').then((r) => dispatch(sucesso(r)));
   };
 }
