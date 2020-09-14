@@ -69,7 +69,7 @@ const SearchItens = (props) => {
   const loadingDrinks = useSelector((state) => state.reducerHeaderDrinks.loading);
   const dadosDrinks = useSelector((state) => state.reducerHeaderDrinks.data);
   const dadosMeals = useSelector((state) => state.reducerHeaderMeals.data);
-  const { location: { pathname } } = props.props;
+  const { location: { pathname } } = props.props.props;
   const tipo = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
   const dispatch = useDispatch();
 
@@ -138,7 +138,7 @@ const Header = (props) => {
   const [clickedSearch, setClickedSearch] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [pathRedirect, setPathRedirect] = useState('');
-  const [isVisible] = useState(visibilitySearchButton(props));
+  const [isVisible] = useState(visibilitySearchButton(props.props));
   const toogleClickedSearch = () => setClickedSearch(!clickedSearch);
 
   const handleProfileClick = () => {
@@ -152,15 +152,15 @@ const Header = (props) => {
       <div className="topo">
         <button
           className="profileButton" data-testid="profile-top-btn"
-          onClick={() => handleProfileClick()}
+          onClick={handleProfileClick}
         >
           <img src={profileIcon} alt="Perfil" />
         </button>
 
-        <span data-testid="page-title"><h1>{titlePage(props)}</h1></span>
+        <span data-testid="page-title"><h1>{titlePage(props.props)}</h1></span>
 
         <button
-          data-testid="search-top-btn" onClick={() => toogleClickedSearch()}
+          data-testid="search-top-btn" onClick={toogleClickedSearch}
           className={(isVisible) ? 'searchButtonVisible' : 'searchButtonNotVisible'}
         >
           {/* ref1 */}
@@ -176,6 +176,10 @@ export default Header;
 
 SearchItens.propTypes = {
   props: PropTypes.objectOf(PropTypes.object).isRequired, //  ref2
+};
+
+Header.propTypes = {
+  props: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 //  ref1: https://www.w3schools.com/cssref/pr_class_visibility.asp
