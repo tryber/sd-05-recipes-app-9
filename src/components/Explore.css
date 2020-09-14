@@ -1,0 +1,20 @@
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 30px;
+}
+
+.explore-button {
+  background-color: white;
+  box-shadow: 5px 5px 15px #c4c4c4;
+  height: 50px;
+  margin-bottom: 50px;
+}
+
+.explore-button:hover {
+  background-color: #c4c4c4;
+}
+
+/* box shadow effect: https://www.w3schools.com/cssref/css3_pr_box-shadow.asp */
