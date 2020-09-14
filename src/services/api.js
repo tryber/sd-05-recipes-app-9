@@ -19,7 +19,8 @@ export function fetchDetails(type, id) {
     return fetch(URLComida).then((response) => (response.json()));
   }
   return fetch(URLBebida).then((response) => (response.json()));
-  
+}
+
 export function fetchCategories(route) {
   let URL;
   switch (route) {
