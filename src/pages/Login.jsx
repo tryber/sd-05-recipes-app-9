@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 const disabledStatus = (email, senha) => {
   const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
-  if (senha.length > 5 && valido !== null) return false;
+  if (senha.length > 6 && valido !== null) return false;
   return true;
 };
 
