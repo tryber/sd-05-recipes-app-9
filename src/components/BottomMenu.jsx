@@ -15,7 +15,7 @@ function BottomMenu() {
           <button
             onClick={() => dispatch(resetCategories())}
           >
-            <img src={drink} alt="Bebidas" data-testid="drinks-bottom-btn"/>
+            <img src={drink} alt="Bebidas" data-testid="drinks-bottom-btn" />
           </button>
         </Link>
       </div>

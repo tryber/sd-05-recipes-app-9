@@ -4,7 +4,7 @@ import ProfileButton from '../components/ProfileButton';
 import BottomMenu from '../components/BottomMenu';
 
 export default function Perfil(props) {
-  const email = JSON.parse(localStorage.getItem('user')).email ;
+  const email = JSON.parse(localStorage.getItem('user')).email;
   return (
     <div>
       <Header props={props} />
