@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 import ProfileButton from '../components/ProfileButton';
+import BottomMenu from '../components/BottomMenu';
 
 export default function Perfil(props) {
-  const email = JSON.parse(localStorage.getItem('user')).email;
+  const email = JSON.parse(localStorage.getItem('user')).email ;
   return (
     <div>
       <Header props={props} />
@@ -24,6 +25,7 @@ export default function Perfil(props) {
         dataTestId="profile-logout-btn"
         onClick={() => localStorage.clear()}
       />
+      <BottomMenu />
     </div>
   );
 }

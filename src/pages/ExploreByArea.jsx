@@ -9,6 +9,7 @@ import { fetchRecipesByArea, fetchMeals } from '../services/api';
 import { recipesByArea, saveRecipes } from '../actions';
 import MainCard from '../components/MainCard';
 import NotFound from './NotFound';
+import BottomMenu from '../components/BottomMenu';
 
 async function fetchData(dispatch, setIsLoading) {
   setIsLoading(true);
@@ -50,6 +51,7 @@ export default function ExploreByArea(props) {
             <MainCard recipe={recipe} index={index} match="/comidas" key={recipe.strMeal} />))
       }
       {!isLoading && match.path === '/explorar/bebidas/area' && <NotFound />}
+      <BottomMenu />
     </div>
   );
 }

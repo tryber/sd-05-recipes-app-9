@@ -14,9 +14,8 @@ function BottomMenu() {
         <Link to="/bebidas">
           <button
             onClick={() => dispatch(resetCategories())}
-            data-testid="drinks-bottom-btn"
           >
-            <img src={drink} alt="Bebidas" />
+            <img src={drink} alt="Bebidas" data-testid="drinks-bottom-btn"/>
           </button>
         </Link>
       </div>
@@ -24,9 +23,8 @@ function BottomMenu() {
         <Link to="/explorar">
           <button
             onClick={() => dispatch(resetCategories())}
-            data-testid="explore-bottom-btn"
           >
-            <img src={explore} alt="Explorar" />
+            <img src={explore} alt="Explorar" data-testid="explore-bottom-btn" />
           </button>
         </Link>
       </div>
@@ -34,9 +32,8 @@ function BottomMenu() {
         <Link to="/comidas">
           <button
             onClick={() => dispatch(resetCategories())}
-            data-testid="food-bottom-btn"
           >
-            <img src={meal} alt="Comidas" />
+            <img src={meal} alt="Comidas" data-testid="food-bottom-btn" />
           </button>
         </Link>
       </div>
