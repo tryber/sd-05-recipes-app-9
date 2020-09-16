@@ -12,12 +12,13 @@ const contentHtml = (handleClickIngredient, notVisible, handleClickArea, handleC
     >
       Por Ingredientes
     </button>
-    <button
+    {(!notVisible) && <button
       className={(notVisible) ? 'notVisible' : 'explore-button'}
       data-testid="explore-by-area" onClick={handleClickArea}
     >
       Por Local de Origem
     </button>
+    }
     <button
       className="explore-button" data-testid="explore-surprise" onClick={handleClickSurprise}
     >

@@ -78,14 +78,14 @@ function receiveDataDrinks(data) {
   };
 }
 
-function receiveDataIngredientsMeal(data) {
+export function receiveDataIngredientsMeal(data) {
   return {
     type: RECEIVE_DATA_INGREDIENTS_MEAL,
     data,
   };
 }
 
-function receiveDataIngredientsDrink(data) {
+export function receiveDataIngredientsDrink(data) {
   return {
     type: RECEIVE_DATA_INGREDIENTS_DRINK,
     data,
