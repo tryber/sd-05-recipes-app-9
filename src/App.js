@@ -11,6 +11,7 @@ import Teste from './components/TesteTelaReceitaEmProgresso';
 import Perfil from './pages/Profile';
 import ExploreByArea from './pages/ExploreByArea';
 import NotFound from './pages/NotFound';
+import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           render={(props) => <ExploreByArea {...props} />}
         />
         <Route exact path="/explorar/bebidas/area" render={(props) => <NotFound {...props} />} />
+        <Route exact path="/receitas-feitas" render={(props) => <DoneRecipes {...props} />} />
         <Route exact path="/comidas" render={(props) => <RecipesMainScreen {...props} />} />
         <Route exact path="/bebidas" render={(props) => <RecipesMainScreen {...props} />} />
         <Route exact path="/explorar" render={(props) => <Explorar {...props} />} />
