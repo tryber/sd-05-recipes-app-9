@@ -12,6 +12,8 @@ export const SET_RECIPES_BY_CATEGORY = 'SET_RECIPES_BY_CATEGORY';
 export const SELECTED_CATEGORY = 'SELECTED_CATEGORY';
 export const LOADING_CATEGORY_RECIPES = 'LOADING_CATEGORY_RECIPES';
 export const RESET_CATEGORIES = 'RESET_CATEGORIES';
+export const SELECTED_AREA = 'SELECTED_AREA';
+export const RECIPES_BY_AREA = 'RECIPES_BY_AREA';
 
 export function saveRecipes(meals, drinks) {
   return {
@@ -119,5 +121,19 @@ export function fetchIngredientsDrinkThunk(tipo) {
     dispatch(requestData());
     return (fetchIngredientsDrinks(tipo))
       .then((json) => dispatch(receiveDataIngredientsDrink(json)));
+  };
+}
+
+export function selectedArea(area) {
+  return {
+    type: SELECTED_AREA,
+    area,
+  };
+}
+
+export function recipesByArea(recipes) {
+  return {
+    type: RECIPES_BY_AREA,
+    recipes,
   };
 }

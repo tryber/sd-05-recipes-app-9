@@ -79,3 +79,19 @@ export function randomDrink() {
   return fetch(URL)
     .then((data) => data.json());
 }
+
+export function fetchAreas() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  return (
+    fetch(URL)
+    .then((data) => data.json())
+  );
+}
+
+export function fetchRecipesByArea(area) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
+  return (
+    fetch(URL)
+    .then((data) => data.json())
+  );
+}
