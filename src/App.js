@@ -8,6 +8,7 @@ import RecipesMainScreen from './pages/RecipesMainScreen';
 import Login from './pages/Login';
 import RecipeDetails from './pages/RecipeDetails';
 import Teste from './components/TesteTelaReceitaEmProgresso';
+import ExploreIngredients from './pages/ExploreIngredients';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/comidas/:id" component={RecipeDetails} />
         <Route exact path="/bebidas/:id" component={RecipeDetails} />
+        <Route exact path="/explorar/comidas/ingredientes" component={ExploreIngredients} />
+        <Route exact path="/explorar/bebidas/ingredientes" component={ExploreIngredients} />
         <Route path="/in-progress" component={Teste} />
       </Switch>
     </div>

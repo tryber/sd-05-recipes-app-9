@@ -26,19 +26,9 @@ button:hover {
   cursor: pointer;
 }
 
-.searchButtonVisible {
-  background-color: transparent;
-  border: none;
-  visibility: visible;
-}
-
 .profileButton {
   background-color: transparent;
   border: none;
-}
-
-.searchButtonNotVisible {
-  visibility: hidden;
 }
 
 .topo {

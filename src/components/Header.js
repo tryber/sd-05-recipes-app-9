@@ -150,23 +150,27 @@ const Header = (props) => {
   return (
     <div>
       <div className="topo">
-        <button
-          className="profileButton"
-          onClick={handleProfileClick}
-        >
-          <img src={profileIcon} alt="Perfil" data-testid="profile-top-btn" />
-        </button>
-
-        <span><h1 data-testid="page-title">{titlePage(props.props)}</h1></span>
-
-        {isVisible &&
+        <div>
           <button
-            onClick={toogleClickedSearch}
+            className="profileButton"
+            onClick={handleProfileClick}
           >
-            {/* ref1 */}
-            <img src={searchIcon} alt="Pesquisar" data-testid="search-top-btn" />
+            <img src={profileIcon} alt="Perfil" data-testid="profile-top-btn" />
           </button>
-        }
+        </div>
+        <div>
+          <span><h1 data-testid="page-title">{titlePage(props.props)}</h1></span>
+        </div>
+        <div>
+          {isVisible &&
+            <button
+              onClick={toogleClickedSearch}
+            >
+              {/* ref1 */}
+              <img src={searchIcon} alt="Pesquisar" data-testid="search-top-btn" />
+            </button>
+          }
+        </div>
       </div>
       {(clickedSearch) && <SearchItens props={props} />}
     </div>

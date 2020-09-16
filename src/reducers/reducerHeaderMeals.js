@@ -3,6 +3,7 @@ import { REQUEST_DATA, RECEIVE_DATA_MEALS, RECEIVE_DATA_INGREDIENTS_MEAL } from 
 const INITIAL_STATE = {
   loading: true,
   data: [],
+  ingredient_explore: '',
 };
 
 function reducerHeaderMeals(state = INITIAL_STATE, action) {
@@ -14,15 +15,18 @@ function reducerHeaderMeals(state = INITIAL_STATE, action) {
       };
     case RECEIVE_DATA_MEALS:
       return {
+        ...state,
         loading: false,
         data: (action.data.meals === null) ? [] : action.data.meals.slice(0, 12),
       };
 
     case RECEIVE_DATA_INGREDIENTS_MEAL:
       return {
+        ...state,
         loading: false,
         data: (action.data.meals === null) ? [] : action.data.meals.slice(0, 12),
       };
+
     default:
       return state;
   }
