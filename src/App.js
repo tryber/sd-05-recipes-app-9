@@ -10,11 +10,18 @@ import RecipeDetails from './pages/RecipeDetails';
 import Teste from './components/TesteTelaReceitaEmProgresso';
 import ExploreIngredients from './pages/ExploreIngredients';
 import Perfil from './pages/Profile';
+import ExploreByArea from './pages/ExploreByArea';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <div>
       <Switch>
+        <Route
+          exact path="/explorar/comidas/area"
+          render={(props) => <ExploreByArea {...props} />}
+        />
+        <Route exact path="/explorar/bebidas/area" render={(props) => <NotFound {...props} />} />
         <Route exact path="/comidas" render={(props) => <RecipesMainScreen {...props} />} />
         <Route exact path="/bebidas" render={(props) => <RecipesMainScreen {...props} />} />
         <Route exact path="/explorar" render={(props) => <Explorar {...props} />} />
