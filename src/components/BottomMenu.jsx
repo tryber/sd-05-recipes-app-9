@@ -10,30 +10,36 @@ function BottomMenu() {
   const dispatch = useDispatch();
   return (
     <div data-testid="footer" className="menu">
-      <Link to="/bebidas">
-        <button
-          onClick={() => dispatch(resetCategories())}
-          data-testid="drinks-bottom-btn"
-        >
-          <img src={drink} alt="Bebidas" />
-        </button>
-      </Link>
-      <Link to="/explorar">
-        <button
-          onClick={() => dispatch(resetCategories())}
-          data-testid="explore-bottom-btn"
-        >
-          <img src={explore} alt="Explorar" />
-        </button>
-      </Link>
-      <Link to="/comidas">
-        <button
-          onClick={() => dispatch(resetCategories())}
-          data-testid="food-bottom-btn"
-        >
-          <img src={meal} alt="Comidas" />
-        </button>
-      </Link>
+      <div>
+        <Link to="/bebidas">
+          <button
+            onClick={() => dispatch(resetCategories())}
+            data-testid="drinks-bottom-btn"
+          >
+            <img src={drink} alt="Bebidas" />
+          </button>
+        </Link>
+      </div>
+      <div>
+        <Link to="/explorar">
+          <button
+            onClick={() => dispatch(resetCategories())}
+            data-testid="explore-bottom-btn"
+          >
+            <img src={explore} alt="Explorar" />
+          </button>
+        </Link>
+      </div>
+      <div>
+        <Link to="/comidas">
+          <button
+            onClick={() => dispatch(resetCategories())}
+            data-testid="food-bottom-btn"
+          >
+            <img src={meal} alt="Comidas" />
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

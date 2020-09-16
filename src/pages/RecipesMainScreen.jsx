@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import BottomMenu from '../components/BottomMenu';
-import { fetchMeals, fetchDrinks } from '../services/api';
-import { saveRecipes } from '../actions';
+import { fetchMeals, fetchDrinks, fetchIngredientsMeals, fetchIngredientsDrinksWithoutText } from '../services/api';
+import { saveRecipes, receiveDataIngredientsMeal, receiveDataIngredientsDrink } from '../actions';
 import MainCard from '../components/MainCard';
 import CategoriesFilter from '../components/CategoriesFilter';
 import Header from '../components/Header';
@@ -58,29 +58,42 @@ function RenderDrinks(props) {
 }
 
 export default function RecipesMainScreen(props) {
+  const { match, location: { state } } = props;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const isItFood = match.path.includes('/comidas');
+  const isItDrink = match.path.includes('/bebidas');
   useEffect(() => {
-    fetchData(dispatch, setIsLoading);
-  }, [dispatch]);
-  const { match } = props;
-  const headerMeals = useSelector((state) => state.reducerHeaderMeals.data);
-  const headerDrinks = useSelector((state) => state.reducerHeaderDrinks.data);
+    if (state && isItFood) {
+      setIsLoading(true);
+      fetchIngredientsMeals(state).then((data) => {
+        dispatch(receiveDataIngredientsMeal(data));
+        setIsLoading(false);
+      });
+    }
+    if (state && isItDrink) {
+      setIsLoading(true);
+      fetchIngredientsDrinksWithoutText(state).then((data) => {
+        dispatch(receiveDataIngredientsDrink(data));
+        setIsLoading(false);
+      });
+    }
+    if (!state) fetchData(dispatch, setIsLoading);
+  }, [dispatch, state, isItFood, isItDrink]);
+
+  const headerMeals = useSelector((stateRedux) => stateRedux.reducerHeaderMeals.data);
+  const headerDrinks = useSelector((stateRedux) => stateRedux.reducerHeaderDrinks.data);
   return (
     <div className="main-container">
       <Header props={props} />
       <CategoriesFilter match={match} />
       <div className="cards">
-        {!isLoading &&
-          match.path === '/comidas' &&
-          ((headerMeals.length > 0) ?
+        {!isLoading && isItFood && ((headerMeals.length > 0) ?
           headerMeals.map((meal, index) =>
             <MainCard index={index} recipe={meal} key={meal.strMeal} match={match.path} />) :
           <RenderMeals match={match} />)
         }
-        {!isLoading &&
-          match.path === '/bebidas' &&
-          ((headerDrinks.length > 0) ?
+        {!isLoading && isItDrink && ((headerDrinks.length > 0) ?
           headerDrinks.map((drink, index) =>
             <MainCard index={index} recipe={drink} key={drink.strDrink} match={match.path} />) :
           <RenderDrinks match={match} />)
@@ -94,4 +107,5 @@ export default function RecipesMainScreen(props) {
 
 RecipesMainScreen.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
 };
