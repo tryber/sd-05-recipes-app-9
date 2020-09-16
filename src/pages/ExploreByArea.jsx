@@ -30,7 +30,7 @@ export default function ExploreByArea(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    return fetchRecipesByArea(selectedArea).then((recipes) =>
+    fetchRecipesByArea(selectedArea).then((recipes) =>
       ((recipes.meals) ?
       dispatch(recipesByArea(recipes.meals.slice(0, 12))) :
       dispatch(recipesByArea(recipes.meals))),
@@ -45,9 +45,9 @@ export default function ExploreByArea(props) {
         !isLoading && match.path === '/explorar/comidas/area' &&
         (mealsRecipesByArea !== null ?
           mealsRecipesByArea.map((recipe, index) =>
-            <MainCard recipe={recipe} index={index} match="/comidas" />) :
+            <MainCard recipe={recipe} index={index} match="/comidas" key={recipe.strMeal} />) :
           mealsRecipes.map((recipe, index) =>
-            <MainCard recipe={recipe} index={index} match="/comidas" />))
+            <MainCard recipe={recipe} index={index} match="/comidas" key={recipe.strMeal} />))
       }
       {!isLoading && match.path === '/explorar/bebidas/area' && <NotFound />}
     </div>
