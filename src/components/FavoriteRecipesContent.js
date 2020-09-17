@@ -72,7 +72,7 @@ const FavoriteRecipesContent = () => {
     setSelectedFilter(name);
   };
 
-  let array = JSON.parse(localStorage.getItem('favoriteRecipes') || []);
+  let array = data;
   if (selectedFilter === 'All') array = data;
   if (selectedFilter === 'comida') array = array.filter((item) => item.type === 'comida');
   if (selectedFilter === 'bebida') array = array.filter((item) => item.type === 'bebida');
@@ -80,8 +80,8 @@ const FavoriteRecipesContent = () => {
   return (
     <div className="conteudo">
       <FilterButtons handleClickButton={handleClickButton} />
-      {array.map((item, index) =>
-        <Card key={item.id} item={item} index={index} setData={setData} />)}
+      {(array.length > 0) ? array.map((item, index) =>
+        <Card key={item.id} item={item} index={index} setData={setData} />) : null}
     </div>
   );
 };
