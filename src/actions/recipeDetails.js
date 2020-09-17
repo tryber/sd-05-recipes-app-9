@@ -19,6 +19,7 @@ function carregando() {
 export function recipeDetailsThunk(tipo, id) {
   return (dispatch) => {
     dispatch(carregando());
+    console.log('irineu')
     return fetchDetails(tipo, id).then(
       (r) => dispatch(sucesso(r)),
     );

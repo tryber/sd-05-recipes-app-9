@@ -1,14 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Slider from 'react-slick';
 import RecomendationCard from './RecomendationCard';
 
-const Recomendations = ({ receitas, loading }) => {
+const Recomendations = ({ receitas, loading, match }) => {
   if (loading) return <div>Loading</div>;
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1
+  };
   return (
-    <div className="wrapper" >
-      {receitas.map((card, index) =>
-        (<RecomendationCard key={card.title} data={card} index={index} />))}
+    <div>
+      <Slider {...settings}>
+        {receitas.map((receita, index) => 
+          <RecomendationCard key={receitas[index].id} data={receita} index={index} />
+        )}
+      </Slider>
     </div>
   );
 };

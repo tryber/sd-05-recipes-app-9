@@ -7,8 +7,8 @@ import ExploreDrink from './pages/ExploreDrink';
 import RecipesMainScreen from './pages/RecipesMainScreen';
 import Login from './pages/Login';
 import RecipeDetails from './pages/RecipeDetails';
-import Teste from './components/TesteTelaReceitaEmProgresso';
 import Perfil from './pages/Profile';
+import ReceitasEmProcesso from './pages/ReceitasEmProcesso';
 
 function App() {
   return (
@@ -21,7 +21,8 @@ function App() {
         <Route exact path="/explorar/bebidas" render={(props) => <ExploreDrink {...props} />} />
         <Route exact path="/comidas/:id" component={RecipeDetails} />
         <Route exact path="/bebidas/:id" component={RecipeDetails} />
-        <Route path="/in-progress" component={Teste} />
+        <Route path="/bebidas/:id/in-progress" component={ReceitasEmProcesso} />
+        <Route path="/comidas/:id/in-progress" component={ReceitasEmProcesso} />
         <Route exact path="/perfil" component={Perfil} />
         <Route exact path="/" component={Login} />
       </Switch>
