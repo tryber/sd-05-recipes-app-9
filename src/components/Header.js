@@ -128,8 +128,8 @@ const titlePage = (props) => {
     '/explorar': 'Explorar',
     '/explorar/comidas': 'Explorar Comidas',
     '/explorar/bebidas': 'Explorar Bebidas',
-    '/explorar/comidas/ingredientes': 'Explorar ingredientes',
-    '/explorar/bebidas/ingredientes': 'Explorar ingredientes',
+    '/explorar/comidas/ingredientes': 'Explorar Ingredientes',
+    '/explorar/bebidas/ingredientes': 'Explorar Ingredientes',
   };
   return obj[pathname];
 };
@@ -159,7 +159,7 @@ const Header = (props) => {
           </button>
         </div>
         <div>
-          <span><h1 data-testid="page-title">{titlePage(props.props)}</h1></span>
+          <h1 data-testid="page-title">{titlePage(props.props)}</h1>
         </div>
         <div>
           {isVisible &&
