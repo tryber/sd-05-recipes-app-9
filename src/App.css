@@ -1,7 +1,21 @@
+.app--main-structure {
+  /* border: 1px solid red; */
+  height: 100vh;
+  padding: 10px;
+  /* width: 100vw; */
+  background-image: url('./images/masterchef.jpg');
+  /* background-position: center; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-clip: inherit; */
+  font-family: 'Ubuntu', sans-serif;
+}
 
-#meals {
+
+/* #meals {
   width: 360px;
-  /* height: 540px; */
+  height: 640px;
+  border: 2px solid black;
   background: rgb(179, 177, 177);
   font-family: sans-serif;
   color: black;
@@ -21,7 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  /* width: 100px; */
 }
 
 .card {
@@ -38,4 +51,4 @@
   position: fixed;
   bottom: 0;
   display: flex;
-}
+} */
