@@ -8,7 +8,7 @@ const comidas = (meals, idElemento, id) => {
     retorno[id] = [...retorno[id], idElemento];
     return retorno;
   }
-  if (!retorno[id]) { 
+  if (!retorno[id]) {
     retorno[id] = [idElemento];
     return retorno;
   }
@@ -39,18 +39,22 @@ const keyConstructor = (id, itensLocalStorage, idElemento, bemidas) => {
 };
 
 const boolChecker = (checado, setChecado, busca, idElemento) => {
-  busca ? document.getElementById(idElemento).classList.add('textoRiscado') : null;
-  busca ? setChecado(!checado) : null;
+  if (busca) {
+    document.getElementById(idElemento).classList.add('textoRiscado');
+    setChecado(!checado);
+  }
+  // busca ?  : null;
+  // busca ?  : null;
 };
 
 const progressChecker = (checado, setChecado, id, bemidas, idElemento) => {
   let emProgresso = localStorage.getItem('inProgressRecipes');
   emProgresso = JSON.parse(emProgresso);
-  if (emProgresso.meals[id] && bemidas === 'comidas') {
+  if (emProgresso && emProgresso.meals[id] && bemidas === 'comidas') {
     const busca = emProgresso.meals[id].find((elementId) => elementId === idElemento);
     boolChecker(checado, setChecado, busca, idElemento);
   }
-  if (emProgresso.cocktails[id] && bemidas === 'bebidas') {
+  if (emProgresso && emProgresso.cocktails[id] && bemidas === 'bebidas') {
     const busca = emProgresso.cocktails[id].find((elementId) => elementId === idElemento);
     boolChecker(checado, setChecado, busca, idElemento);
   }

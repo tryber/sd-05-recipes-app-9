@@ -73,25 +73,26 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
 
 const unlockFinish = (finalizar, setFinalizar) => {
   const done = document.getElementsByClassName('textoRiscado').length;
+  console.log('done', done);
   let total =  document.getElementsByClassName('ingredientContainer').length;
+  console.log('total', total);
   if (done === total) return setFinalizar(!finalizar);
 };
 
 const RecipeDetails = (props) => {
   const { recipe, location: { pathname } } = props;
   const dispatch = useDispatch();
-  
   const [redirect, setRedirect] = useState(false);
   const [finalizar, setFinalizar] = useState(true);
   const [favoritado, setFavoritado] = useState(false);
   const params = onCoTo(pathname);
 
   useEffect(() => {
-    unlockFinish(finalizar, setFinalizar);
     favoriteChecker(params.id, setFavoritado);
     const receitaDetalhada = recipeDetailsThunk(params.bemidas, params.id);
     dispatch(receitaDetalhada);
   }, [dispatch, pathname]);
+
   if (props.loading) return <p>Loading</p>;
   if (redirect) return <Redirect to="/receitas-feitas" />;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions } = recipe;
@@ -117,7 +118,7 @@ const RecipeDetails = (props) => {
       />
       </button>
       {ingredients.map((ingredient, index) => {
-        const data ={
+        const data = {
           ingredient,
           measure: measures[index],
           onChange: () => (unlockFinish(finalizar, setFinalizar)),
