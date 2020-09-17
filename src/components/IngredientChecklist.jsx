@@ -62,15 +62,21 @@ const progressChecker = (checado, setChecado, id, bemidas, idElemento) => {
 };
 
 const IngredientChecklist = ({ data, index }) => {
-  const { ingredient, measure, onChange, id, bemidas } = data;
+  const { ingredient, measure, onChange, id, bemidas, ingredientsSize } = data;
   const [checado, setChecado] = useState(false);
   const idElemento = `${ingredient}${index}`;
+
+  const done = document.getElementsByClassName('textoRiscado').length;
 
   const toggler = (checado) => (setChecado(!checado));
 
   useEffect(() => {
     progressChecker(checado, setChecado, id, bemidas, idElemento);
   }, []);
+
+  useEffect(() => {
+    if (done === ingredientsSize) onChange();
+  }, [done]);
 
   const storeIngredients = () => {
     const idElemento = `${ingredient}${index}`;

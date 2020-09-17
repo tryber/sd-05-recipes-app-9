@@ -71,12 +71,17 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
   setTrueFalse(!bool)
 );
 
-const unlockFinish = (finalizar, setFinalizar) => {
+const unlockFinish = (finalizar, setFinalizar, checkSize) => {
+  // console.log('tamanho a checar de dentro do unlockFinish', checkSize);
   const done = document.getElementsByClassName('textoRiscado').length;
-  console.log('done', done);
+  // console.log('done', done);
   let total =  document.getElementsByClassName('ingredientContainer').length;
   console.log('total', total);
-  if (done === total) return setFinalizar(!finalizar);
+  console.log('finalizar', finalizar);
+  if (done > 0 && done === total && total === checkSize && finalizar === true) {
+    console.log('entrei no if cabulosao');
+    return setFinalizar(false);
+  }
 };
 
 const RecipeDetails = (props) => {
@@ -86,6 +91,7 @@ const RecipeDetails = (props) => {
   const [finalizar, setFinalizar] = useState(true);
   const [favoritado, setFavoritado] = useState(false);
   const params = onCoTo(pathname);
+
 
   useEffect(() => {
     favoriteChecker(params.id, setFavoritado);
@@ -97,6 +103,7 @@ const RecipeDetails = (props) => {
   if (redirect) return <Redirect to="/receitas-feitas" />;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions } = recipe;
   const { ingredients, measures } = ingredientData;
+  const checkSize = ingredients.filter((ingrediente) => ingrediente !== "").length;
 
   return (
     <div>
@@ -121,9 +128,10 @@ const RecipeDetails = (props) => {
         const data = {
           ingredient,
           measure: measures[index],
-          onChange: () => (unlockFinish(finalizar, setFinalizar)),
+          onChange: () => (unlockFinish(finalizar, setFinalizar, checkSize)),
           id: params.id,
           bemidas: params.bemidas,
+          ingredientsSize: checkSize,
         }
        return <IngredientChecklist key={`${ingredient}${index}i`}index={index} data={data} />
       })}
