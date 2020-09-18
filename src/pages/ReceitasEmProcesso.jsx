@@ -74,15 +74,35 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
 const unlockFinish = (finalizar, setFinalizar, checkSize) => {
   // console.log('tamanho a checar de dentro do unlockFinish', checkSize);
   const done = document.getElementsByClassName('textoRiscado').length;
-  // console.log('done', done);
+  // console.log('done', done);  
   let total =  document.getElementsByClassName('ingredientContainer').length;
-  console.log('total', total);
-  console.log('finalizar', finalizar);
   if (done > 0 && done === total && total === checkSize && finalizar === true) {
-    console.log('entrei no if cabulosao');
     return setFinalizar(false);
   }
 };
+
+// let itensLocalStorage = localStorage.getItem('inProgressRecipes');
+// if (itensLocalStorage) {
+//   itensLocalStorage = JSON.parse(itensLocalStorage);
+//   const emProcesso = keyConstructor(id, itensLocalStorage, idElemento, bemidas);
+//   return localStorage.setItem('inProgressRecipes', JSON.stringify(emProcesso));
+// }
+// const chamadaInicial = keyConstructor(id, inProgressRecipes, idElemento, bemidas);
+// return localStorage.setItem('inProgressRecipes', JSON.stringify(chamadaInicial));
+
+
+const salvarReceita = (receita) => {
+  const receitaAtual = receita;
+  const data = JSON.stringify(new Date());
+  receitaAtual.doneDate = data;
+  let doneRecipes = localStorage.getItem('doneRecipes');
+  if (doneRecipes) {
+    doneRecipes = JSON.parse(doneRecipes);
+    const vaiProLocalStorage = [...doneRecipes, receitaAtual]
+    return localStorage.setItem('doneRecipes', JSON.stringify(vaiProLocalStorage));
+  }
+  return localStorage.setItem('doneRecipes', JSON.stringify([receitaAtual]));
+}
 
 const RecipeDetails = (props) => {
   const { recipe, location: { pathname } } = props;
@@ -91,7 +111,6 @@ const RecipeDetails = (props) => {
   const [finalizar, setFinalizar] = useState(true);
   const [favoritado, setFavoritado] = useState(false);
   const params = onCoTo(pathname);
-
 
   useEffect(() => {
     favoriteChecker(params.id, setFavoritado);
@@ -103,7 +122,7 @@ const RecipeDetails = (props) => {
   if (redirect) return <Redirect to="/receitas-feitas" />;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions } = recipe;
   const { ingredients, measures } = ingredientData;
-  const checkSize = ingredients.filter((ingrediente) => ingrediente !== "").length;
+  const checkSize = ingredients.filter((ingrediente) => ingrediente !== "" && ingrediente !== null).length;
 
   return (
     <div>
@@ -142,6 +161,7 @@ const RecipeDetails = (props) => {
         disabled={finalizar}
         onClick={() => {
           toggleTrueFalse(redirect, setRedirect);
+          salvarReceita(recipe.localStorage)
         }}
       >Finalizar receita</button>
     </div>

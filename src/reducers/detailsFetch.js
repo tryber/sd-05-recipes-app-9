@@ -58,6 +58,7 @@ const recipeMapper = (recipe, agradandoAoCC) => {
       area,
       image,
       name,
+      tags: recipe.strTags,
     },
   };
 };

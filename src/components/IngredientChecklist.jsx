@@ -43,8 +43,6 @@ const boolChecker = (checado, setChecado, busca, idElemento) => {
     document.getElementById(idElemento).classList.add('textoRiscado');
     setChecado(!checado);
   }
-  // busca ?  : null;
-  // busca ?  : null;
 };
 
 const progressChecker = (checado, setChecado, id, bemidas, idElemento) => {
@@ -88,7 +86,7 @@ const IngredientChecklist = ({ data, index }) => {
     if (itensLocalStorage) {
       itensLocalStorage = JSON.parse(itensLocalStorage);
       const emProcesso = keyConstructor(id, itensLocalStorage, idElemento, bemidas);
-      return localStorage.setItem('inProgressRecipes', JSON.stringify(emProcesso))
+      return localStorage.setItem('inProgressRecipes', JSON.stringify(emProcesso));
     }
     const chamadaInicial = keyConstructor(id, inProgressRecipes, idElemento, bemidas);
     return localStorage.setItem('inProgressRecipes', JSON.stringify(chamadaInicial));
