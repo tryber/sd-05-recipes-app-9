@@ -1,30 +1,79 @@
+.filterButton {
+  background-color: rgb(242, 242, 242);
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  outline: none;
+  padding: 10px 25px;
+  width: 25vw;
+}
+
+.filterButton:hover {
+  background-color: rgb(202, 198, 198);
+}
+
+.filterButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
 .conteudo {
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .left {
-  background-color: black;
-  width: 30%;
+  height: 25vh;
+  width: 45%;
 }
 
 img {
-  max-height: 100%;
+  border-radius: 5px;
+  /* max-height: 100%; */
+  height: 100%;
   max-width: 100%;
+  overflow: visible;
 }
 
 .containerCard {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0,
+0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex;
-  padding-bottom: 5px;
+  height: 25vh;
+  margin: 0 auto 30px auto;
+  width: 90%;
 }
 
 .right {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  width: 55%;
 }
 
-.filterButtons {
+span {
+  font-size: 90%;
+  color:rgb(121, 118, 121);
+}
+
+h4 {
+  font-size: 100%;
+  font-weight: normal;
+  max-height: 50px;
+  width: 200%;
+  overflow: scroll;
+}
+
+.share-unlike {
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 5px;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+  /* padding-right: 10px; */
+  width: 100%;
+}
+
+.share-unlike img {
+  width: 80%;
 }

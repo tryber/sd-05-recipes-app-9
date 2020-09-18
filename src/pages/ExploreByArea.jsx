@@ -11,6 +11,7 @@ import MainCard from '../components/MainCard';
 import NotFound from './NotFound';
 import BottomMenu from '../components/BottomMenu';
 import './ExploreByArea.css';
+import loader from '../images/loader1.gif';
 
 async function fetchData(dispatch, setIsLoading) {
   setIsLoading(true);
@@ -43,7 +44,7 @@ export default function ExploreByArea(props) {
     <div>
       <Header props={props} />
       <DropDownArea />
-      <div className="main-container">
+      <div className="explore-main-container">
         {
           !isLoading && match.path === '/explorar/comidas/area' &&
           (mealsRecipesByArea !== null ?
@@ -53,6 +54,7 @@ export default function ExploreByArea(props) {
               <MainCard recipe={recipe} index={index} match="/comidas" key={recipe.strMeal} />))
         }
         {!isLoading && match.path === '/explorar/bebidas/area' && <NotFound />}
+        {isLoading && <img className="loader" alt="loader" src={loader} />}
       </div>
       <BottomMenu />
     </div>

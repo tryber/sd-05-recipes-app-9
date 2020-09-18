@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './FavoriteRecipesContent.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import './FavoriteRecipesContent.css';
 
 const copy = require('clipboard-copy');
 
@@ -11,13 +12,13 @@ const FilterButtons = (props) => {
   const { handleClickButton } = props;
   return (
     <div className="filterButtons">
-      <button name="All" onClick={handleClickButton} data-testid="filter-by-all-btn">
+      <button className="filterButton" name="All" onClick={handleClickButton} data-testid="filter-by-all-btn">
         All
       </button>
-      <button name="comida" onClick={handleClickButton} data-testid="filter-by-food-btn">
+      <button className="filterButton" name="comida" onClick={handleClickButton} data-testid="filter-by-food-btn">
         Food
       </button>
-      <button name="bebida" onClick={handleClickButton} data-testid="filter-by-drink-btn">
+      <button className="filterButton" name="bebida" onClick={handleClickButton} data-testid="filter-by-drink-btn">
         Drinks
       </button>
     </div>
@@ -46,10 +47,10 @@ const Card = (props) => {
         </Link>
       </div>
       <div className="right">
+        <span data-testid={`${index}-horizontal-top-text`}>{ (item.type === 'comida') ? `${item.area} - ${item.category}` : item.alcoholicOrNot }</span>
         <Link to={`${item.type}s/${item.id}`}>
           <h4 data-testid={`${index}-horizontal-name`}>{item.name}</h4>
         </Link>
-        <span data-testid={`${index}-horizontal-top-text`}>{ (item.type === 'comida') ? `${item.area} - ${item.category}` : item.alcoholicOrNot }</span>
         <div className="share-unlike">
           <button id={`share-btn-${item.id}`} onClick={handleClickShare}>
             <img src={shareIcon} alt="Compartilhar" data-testid={`${index}-horizontal-share-btn`} />
