@@ -1,0 +1,16 @@
+.img {
+  text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.img img {
+  width: 25%;
+  border-radius: 50%;
+}
+
+h2 {
+  font-weight: lighter;
+  text-align: center;
+  margin-bottom: 35px;
+}

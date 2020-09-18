@@ -152,7 +152,7 @@ const Header = (props) => {
 
   if (redirect) return (<Redirect to={pathRedirect} />);
   return (
-    <div>
+    <div className="header">
       <div className="topo">
         <div>
           <button
@@ -165,7 +165,7 @@ const Header = (props) => {
         <div>
           <h1 data-testid="page-title">{titlePage(props.props)}</h1>
         </div>
-        <div>
+        <div className="search-div">
           {isVisible &&
             <button
               onClick={toogleClickedSearch}

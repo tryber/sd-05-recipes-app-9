@@ -1,11 +1,13 @@
-.cards {
+.ingredients {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-bottom: 8vh;
   overflow: scroll;
+  text-align: center;
 }
 
 .loader {
+  margin: auto;
   width: 150px;
 }

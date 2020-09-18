@@ -1,3 +1,8 @@
+.header {
+  position: sticky;
+  top: 0;
+}
+
 .search-input {
   border: 1px solid rgb(242, 242, 242);
   border-radius: 5px 0 0 5px;
@@ -26,6 +31,9 @@
   width: 15%;
 }
 
+.search-div {
+  width: 10%;
+}
 
 
 .withoutSelector {
@@ -68,10 +76,12 @@ button:hover {
 }
 
 .search {
+  background-color: white;
   display: flex;
   flex-direction: column;
   font-size: 18px;
   padding: 10px;
+  margin-top: 0;
 }
 
 .radiosAndFilterButton {
@@ -88,4 +98,5 @@ button:hover {
 
 h1 {
   font-weight: lighter;
+  font-size: 150%;
 }
