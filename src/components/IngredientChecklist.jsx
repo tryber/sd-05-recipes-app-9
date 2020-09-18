@@ -27,7 +27,6 @@ const bebidas = (cocktails, idElemento, id) => {
 }
 
 const keyConstructor = (id, itensLocalStorage, idElemento, bemidas) => {
-  const retorno = itensLocalStorage;
   if (bemidas === 'comidas') {
     const newMeals = comidas(itensLocalStorage.meals, idElemento, id);
     return { meals: newMeals, cocktails: itensLocalStorage.cocktails }

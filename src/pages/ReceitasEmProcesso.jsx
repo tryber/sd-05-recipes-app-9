@@ -81,16 +81,6 @@ const unlockFinish = (finalizar, setFinalizar, checkSize) => {
   }
 };
 
-// let itensLocalStorage = localStorage.getItem('inProgressRecipes');
-// if (itensLocalStorage) {
-//   itensLocalStorage = JSON.parse(itensLocalStorage);
-//   const emProcesso = keyConstructor(id, itensLocalStorage, idElemento, bemidas);
-//   return localStorage.setItem('inProgressRecipes', JSON.stringify(emProcesso));
-// }
-// const chamadaInicial = keyConstructor(id, inProgressRecipes, idElemento, bemidas);
-// return localStorage.setItem('inProgressRecipes', JSON.stringify(chamadaInicial));
-
-
 const salvarReceita = (receita) => {
   const receitaAtual = receita;
   const data = JSON.stringify(new Date());

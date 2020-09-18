@@ -77,6 +77,26 @@ const favoriteChecker = (id, setFavoritado) => {
   }
 };
 
+const isItDone = (idAtual) => {
+  const doneRecipes = localStorage.getItem('doneRecipes') ?
+  JSON.parse(localStorage.getItem('doneRecipes')) : false;
+  if (doneRecipes === false) return doneRecipes;
+  return doneRecipes.some((receita) => (receita.id === idAtual));
+};
+
+const isItInProgress = (bemidas, idAtual) => {
+  const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
+  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
+  if (inProgressRecipes === false) return inProgressRecipes;
+  const { meals, cocktails } = inProgressRecipes;
+  if (bemidas === 'comidas') {
+    return meals[idAtual] ? true : false;
+  }
+  if (bemidas === 'comidas') {
+    return cocktails[idAtual] ? true : false;
+  }
+};
+
 const RecipeDetails = (props) => {
   const { recipe, location: { pathname } } = props;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions, video } = recipe;
@@ -85,15 +105,16 @@ const RecipeDetails = (props) => {
   const [redirectProgresso, setRedirectProgresso] = useState(false);
   const dispatch = useDispatch();
 
+  const params = onCoTo(pathname);
+  const { id, bemidas } = params
   useEffect(() => {
-    const params = onCoTo(pathname);
-    favoriteChecker(params.id, setFavoritado);
-    const receitaDetalhada = recipeDetailsThunk(params.bemidas, params.id);
-    const recomendations = recipeRecomendationsThunk(params.bemidas);
+    isItDone(id);
+    favoriteChecker(id, setFavoritado);
+    const receitaDetalhada = recipeDetailsThunk(bemidas, id);
+    const recomendations = recipeRecomendationsThunk(bemidas);
     dispatch(recomendations);
     dispatch(receitaDetalhada);
   }, [dispatch, pathname]);
-
   if (props.loading) return <p>Loading</p>;
   if (redirectProgresso) return <Redirect to={`${pathname}/in-progress`} />;
   return (
@@ -122,8 +143,9 @@ const RecipeDetails = (props) => {
       <button
         className="start-recipe-btn"
         data-testid="start-recipe-btn"
+        disabled={isItDone(id)}
         onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
-      >Começar a receita</button>
+      >{isItInProgress(bemidas, id) ? 'Continuar Receita' : 'Começar Receita'}</button>
     </div>
   );
 };
