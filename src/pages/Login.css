@@ -1,7 +1,11 @@
 .login--main-container {
   align-items: center;
+  background-image: url('../images/masterchef.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   width: 100%;
 }
 
@@ -31,4 +35,9 @@
   height: 70px;
   margin-top: 80px;
   width: 90%;
+}
+
+.login-button:disabled {
+  background: #cc7373;
+  color: #5e5353;
 }

@@ -17,11 +17,20 @@ const handleClick = (setFetchType, setInitFetch, radio, input, pathname) => {
 const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
   setFetchType, setInitFetch, radio, pathname) => (
     <div className="search">
-      <input
-        type="text" value={input}
-        onChange={(event) => handleChangeInput(event.target.value)}
-        name="search-input" data-testid="search-input" className="search-input"
-      />
+      <div className="input-search-button">
+        <input
+          type="text" value={input}
+          onChange={(event) => handleChangeInput(event.target.value)}
+          name="search-input" data-testid="search-input" className="search-input"
+        />
+        <button
+          className="search-img"
+          data-testid="exec-search-btn"
+          onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
+        >
+          <img src={searchIcon} alt="Pesquisar" />
+        </button>
+      </div>
       <div className="radiosAndFilterButton">
         <div className="ingrediente">
           <input
@@ -48,12 +57,7 @@ const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
         </div>
       </div>
       <div className="execButton">
-        <button
-          data-testid="exec-search-btn"
-          onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
-        >
-          Filtrar
-        </button>
+
       </div>
     </div>
 );

@@ -7,6 +7,7 @@ import { saveRecipes, receiveDataIngredientsMeal, receiveDataIngredientsDrink } 
 import MainCard from '../components/MainCard';
 import CategoriesFilter from '../components/CategoriesFilter';
 import Header from '../components/Header';
+import './RecipesMainScreen.css';
 
 async function fetchData(dispatch, setIsLoading) {
   setIsLoading(true);

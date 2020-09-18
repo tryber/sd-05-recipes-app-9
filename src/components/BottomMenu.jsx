@@ -5,6 +5,7 @@ import drink from '../images/drinkIcon.svg';
 import explore from '../images/exploreIcon.svg';
 import meal from '../images/mealIcon.svg';
 import { resetCategories } from '../actions';
+import './BottomMenu.css';
 
 function BottomMenu() {
   const dispatch = useDispatch();

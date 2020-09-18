@@ -1,13 +1,7 @@
 .app--main-structure {
-  /* border: 1px solid red; */
   height: 100vh;
-  padding: 10px;
-  /* width: 100vw; */
-  background-image: url('./images/masterchef.jpg');
-  /* background-position: center; */
-  background-size: cover;
-  background-repeat: no-repeat;
-  /* background-clip: inherit; */
+  /* padding: 10px; */
+  /* background-image: url('./images/masterchef.jpg'); */
   font-family: 'Ubuntu', sans-serif;
 }
 
