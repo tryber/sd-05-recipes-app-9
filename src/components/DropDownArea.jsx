@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchAreas } from '../services/api';
 import { selectedArea } from '../actions';
+import './DropDownArea.css';
 
 export default function DropDownArea() {
   const [areas, setAreas] = useState([]);
@@ -13,7 +14,7 @@ export default function DropDownArea() {
     .then((allAreas) => setAreas([{ strArea: 'All' }, ...allAreas.meals]));
   }, []);
   return (
-    <div>
+    <div className="drop-down">
       <select
         data-testid="explore-by-area-dropdown"
         onChange={(event) => dispatch(selectedArea(event.target.value))}
