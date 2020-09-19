@@ -1,4 +1,4 @@
-import { REQUEST_DATA, RECEIVE_DATA_DRINKS, RECEIVE_DATA_INGREDIENTS_DRINK } from '../actions/index';
+import { REQUEST_DATA, RECEIVE_DATA_DRINKS, RECEIVE_DATA_INGREDIENTS_DRINK, CLEAR_DATA_DRINKS } from '../actions/index';
 
 const INITIAL_STATE = {
   loading: true,
@@ -24,7 +24,12 @@ function reducerHeaderDrinks(state = INITIAL_STATE, action) {
         loading: false,
         data: (action.data === null) ? [] : action.data.drinks.slice(0, 12),
       };
-
+    case CLEAR_DATA_DRINKS:
+      return {
+        ...state,
+        loading: true,
+        data: [],
+      }
     default:
       return state;
   }
