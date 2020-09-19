@@ -71,26 +71,9 @@ const IngredientChecklist = ({ data, index }) => {
   //   if (done === ingredientsSize) onChange();
   // }, [done]);
 
-  const storeIngredients = () => {
-    const idElemento = `${ingredient}${index}`;
-    const inProgressRecipes = {
-      cocktails: {},
-      meals: {},
-    };
-    let itensLocalStorage = localStorage.getItem('inProgressRecipes');
-    if (itensLocalStorage) {
-      itensLocalStorage = JSON.parse(itensLocalStorage);
-      const emProcesso = keyConstructor(id, itensLocalStorage, idElemento, bemidas);
-      return localStorage.setItem('inProgressRecipes', JSON.stringify(emProcesso));
-    }
-    const chamadaInicial = keyConstructor(id, inProgressRecipes, idElemento, bemidas);
-    return localStorage.setItem('inProgressRecipes', JSON.stringify(chamadaInicial));
-  };
+  
 
-  const riscaTexto = (checado) => {
-    if (checado) return document.getElementById(`${ingredient}`).classList.remove('textoRiscado');
-    document.getElementById(`${ingredient}${index}`).className='textoRiscado';
-  };
+  
   if (ingredient && ingredient !== '') {
     return (
       <div className="ingredientContainer">
@@ -99,11 +82,10 @@ const IngredientChecklist = ({ data, index }) => {
             disabled={checkbox}
             value={`${ingredient}`}
             checked={checkbox} onChange={() => {
-              riscaTexto(checkbox);
               storeIngredients();
               onChange();
             }}
-          />{`${ingredient}${(measure === null) ? '' : ` - ${measure}`}`}
+          />
         </label>
       </div>
     );

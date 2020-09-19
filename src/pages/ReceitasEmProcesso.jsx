@@ -1,25 +1,53 @@
-import React, { useEffect } from 'react';
-import { useDispatch, connect } from 'react-redux';
-import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { recipeDetailsThunk } from '../actions/recipeDetails';
+import { Redirect } from 'react-router-dom';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import IngredientChecklist from '../components/IngredientChecklist';
+import { recipeDetailsThunk } from '../actions/recipeDetails';
+import Checkbox from '../components/Checkbox';
+import '../components/receitasEmProcesso.css';
 
 const copy = require('clipboard-copy');
 
-const onCoTo = (pathname) => {
+const copyText = (pathname) => {
+  //copia o link da pagina atual
+  const linkPaths = pathname.split('/');
+  const link = `http://localhost:3000/${linkPaths[1]}/${linkPaths[2]}`;
+  document.getElementById('share-btn').innerText = 'Link copiado!';
+  copy(link);
+};
+
+const rota = (pathname) => {
+  // cria um objeto com chaves dizendo o id, e se está na tela de comidas ou bebidas
   const caminhos = pathname.split('/');
   return ({
-    bemidas: caminhos[1],
+    comidaOuBebida: caminhos[1],
     id: caminhos[2],
   });
 };
 
+const toggleTrueFalse = (bool, setTrueFalse) => (
+  setTrueFalse(!bool)
+);
+
+const salvarReceita = (receita) => {
+  /* salva as receitas prontas quando o usuario clica no botão finalizar receita*/
+  const receitaAtual = receita;
+  const data = JSON.stringify(new Date());
+  receitaAtual.doneDate = data;
+  let doneRecipes = localStorage.getItem('doneRecipes');
+  if (doneRecipes) {
+    doneRecipes = JSON.parse(doneRecipes);
+    const vaiProLocalStorage = [...doneRecipes, receitaAtual]
+    return localStorage.setItem('doneRecipes', JSON.stringify(vaiProLocalStorage));
+  }
+  return localStorage.setItem('doneRecipes', JSON.stringify([receitaAtual]));
+};
+
 const favoriteChecker = (id, setFavoritado) => {
+	// testa se a receita já foi favoritada antes
   let receitasFavoritas = localStorage.getItem('favoriteRecipes');
   if (receitasFavoritas) {
     receitasFavoritas = JSON.parse(receitasFavoritas);
@@ -28,14 +56,8 @@ const favoriteChecker = (id, setFavoritado) => {
   }
 };
 
-const copyText = (pathname) => {
-  const linkPaths = pathname.split('/');
-  const link = `http://localhost:3000/${linkPaths[1]}/${linkPaths[2]}`;
-  document.getElementById('share-btn').innerText = 'Link copiado!';
-  copy(link);
-};
-
 const storeFavorites = (favoritado, recipe) => {
+  //guarda nos favoritos a receita se o usuario clicar no botão favoritar
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe.localStorage;
   let receitasFavoritas = localStorage.getItem('favoriteRecipes');
 
@@ -67,81 +89,25 @@ const storeFavorites = (favoritado, recipe) => {
   return localStorage.setItem('favoriteRecipes', JSON.stringify([novaReceita]));
 };
 
-const toggleTrueFalse = (bool, setTrueFalse) => (
-  setTrueFalse(!bool)
-);
-
-const olhaCheckbox = (id, bemidas, ingrediente) => {
-  let receitaAtual = localStorage.getItem('inProgressRecipes') ?
-  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
-  if (!receitaAtual || receitaAtual === undefined) return false;
-  if (bemidas === 'comidas') {
-    receitaAtual = receitaAtual.meals[id];
-  }
-  if (bemidas === 'bebidas') {
-    receitaAtual = receitaAtual.cocktails[id];
-  }
-  return receitaAtual ? receitaAtual.includes(ingrediente) : false;
-};
-
-const unlockFinish = (id, ingredientData, bemidas, setDisabled) => {
-  const receitaAtual = localStorage.getItem('inProgressRecipes') ?
-  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
-  const ingredientes = ingredientData.ingredients.filter((ing) => (ing !== '' && ing !== null));
-  if (!receitaAtual) return setDisabled(true);
-  let ingredientesAtuais = [];
-  if (bemidas === 'comidas') {
-    ingredientesAtuais = receitaAtual.meals[id];
-  }
-  if (bemidas === 'bebidas') {
-    ingredientesAtuais = receitaAtual.cocktails[id];
-  }
-  if (ingredientesAtuais !== undefined && ingredientesAtuais.length === ingredientes.length) {
-    return setDisabled(false);
-  }
-  return setDisabled(true);
-};
-
-const salvarReceita = (receita) => {
-  const receitaAtual = receita;
-  const data = JSON.stringify(new Date());
-  receitaAtual.doneDate = data;
-  let doneRecipes = localStorage.getItem('doneRecipes');
-  if (doneRecipes) {
-    doneRecipes = JSON.parse(doneRecipes);
-    const vaiProLocalStorage = [...doneRecipes, receitaAtual]
-    return localStorage.setItem('doneRecipes', JSON.stringify(vaiProLocalStorage));
-  }
-  return localStorage.setItem('doneRecipes', JSON.stringify([receitaAtual]));
-};
-
-const RecipeDetails = (props) => {
-  const { recipe, location: { pathname } } = props;
-  const dispatch = useDispatch();
-  const [redirect, setRedirect] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
   const [favoritado, setFavoritado] = useState(false);
-  const params = onCoTo(pathname);
+  const [redirect, setRedirect] = useState(false);
+  
+  const rotaEid = rota(pathname);
+  const { id, comidaOuBebida } = rotaEid;
+  
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    favoriteChecker(params.id, setFavoritado);
-    const receitaDetalhada = recipeDetailsThunk(params.bemidas, params.id);
+    const receitaDetalhada = recipeDetailsThunk(comidaOuBebida, id);
+    favoriteChecker(id, setFavoritado);
     dispatch(receitaDetalhada);
-  }, [dispatch, pathname]);
+  }, [dispatch, id, comidaOuBebida]);
 
-  useEffect(() => {
-    if (props.loading === false) {
-      unlockFinish(params.id, ingredientData, params.bemidas, setDisabled);
-    }
-  }, [props.loading])
-
-  if (props.loading) return <p>Loading</p>;
+  if (carregando) return <p>Loading</p>;
   if (redirect) return <Redirect to="/receitas-feitas" />;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions } = recipe;
   const { ingredients, measures } = ingredientData;
-  const checkSize = ingredients.filter((ingrediente) => ingrediente !== "" && ingrediente !== null).length;
-
-
   return (
     <div>
       <img data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
@@ -162,22 +128,21 @@ const RecipeDetails = (props) => {
       />
       </button>
       {ingredients.map((ingredient, index) => {
-        let checkboxIC = olhaCheckbox(params.id, params.bemidas, `${ingredient}${index}`);
+        if (!ingredient|| ingredient === '') return null;
         const data = {
           ingredient,
+          index,
           measure: measures[index],
-          onChange: () => (unlockFinish(params.id, ingredientData, params.bemidas, setDisabled)),
-          id: params.id,
-          bemidas: params.bemidas,
-          checkbox: checkboxIC,
-        }
-       return <IngredientChecklist key={`${ingredient}${index}i`}index={index} data={data} />
+          comidaOuBebida,
+          id,
+        };
+        return <Checkbox key={`${ingredient}${index}`} data={data} />;
       })}
       <p data-testid="instructions" >{instructions}</p>
       <button
         className="start-recipe-btn"
         data-testid="finish-recipe-btn"
-        disabled={disabled}
+        disabled={true}
         onClick={() => {
           toggleTrueFalse(redirect, setRedirect);
           salvarReceita(recipe.localStorage)
@@ -185,17 +150,17 @@ const RecipeDetails = (props) => {
       >Finalizar receita</button>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state) => ({
   recipe: state.detailsFetch.recipe,
-  loading: state.detailsFetch.carregando,
+  carregando: state.detailsFetch.carregando,
 });
 
-RecipeDetails.propTypes = {
+ReceitasEmProcesso.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
-  loading: PropTypes.bool.isRequired,
+  carregando: PropTypes.bool.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps)(RecipeDetails);
+export default connect(mapStateToProps)(ReceitasEmProcesso);
