@@ -12,11 +12,11 @@
   width: 100%;
 }
 
-a {
+.card a {
   color: black;
-  margin: 0;
+  margin: 10px;
   text-decoration: none;
-  width: 45%;
+  width: 40%;
 }
 
 .card p {
