@@ -61,7 +61,7 @@ const shouldUnlock = (ingredients, id, comidaOuBebida) => {
   JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
   let key = comidaOuBebida;
   (key === 'comidas') ? key = 'meals' : key = 'cocktails';
-  console.log(inProgressRecipes[key][id])
+  console.log(key)
   const progressoAtual = inProgressRecipes[key][id] ? inProgressRecipes[key][id].length : true;
   if (progressoAtual === true) return true;
   const progressoTotal = ingredients.filter((ing) => ing !== undefined && ing !== '').length;
@@ -157,7 +157,6 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
       <button
         className="start-recipe-btn"
         data-testid="finish-recipe-btn"
-        disabled={shouldUnlock(ingredients, id, comidaOuBebida)}
         onClick={() => {
           toggleTrueFalse(redirect, setRedirect);
           salvarReceita(recipe.localStorage)

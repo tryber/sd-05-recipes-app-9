@@ -407,7 +407,7 @@ describe('A mesma lógica de favoritar e compartilhar da tela de detalhes de uma
   });
 });
 
-describe.only('O botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
+describe('O botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
   it('verifica se botão para finalizar está desabilitado em receitas de comidas', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {

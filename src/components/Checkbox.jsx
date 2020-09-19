@@ -38,8 +38,11 @@ const progressChecker = (id, comidaOuBebida, idElemento) => {
   let key = comidaOuBebida;
   (key === 'comidas') ? key = 'meals' : key = 'cocktails';
   const categoriaAtual = inProgressRecipes[key];
+  if (inProgressRecipes === false) return null;
   if (categoriaAtual[id] === undefined) return null;
-  if (categoriaAtual[id].includes(idElemento)) document.getElementById(idElemento).className="textoRiscado";
+  if (categoriaAtual[id].includes(idElemento)) {
+    document.getElementById(idElemento).className="textoRiscado";
+  }
   return categoriaAtual[id].includes(idElemento);
 };
 
