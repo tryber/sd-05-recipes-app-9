@@ -56,6 +56,20 @@ const favoriteChecker = (id, setFavoritado) => {
   }
 };
 
+const shouldUnlock = (ingredients, id, comidaOuBebida) => {
+  const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
+  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
+  let key = comidaOuBebida;
+  (key === 'comidas') ? key = 'meals' : key = 'cocktails';
+  console.log(inProgressRecipes[key][id])
+  const progressoAtual = inProgressRecipes[key][id] ? inProgressRecipes[key][id].length : true;
+  if (progressoAtual === true) return true;
+  const progressoTotal = ingredients.filter((ing) => ing !== undefined && ing !== '').length;
+  if (progressoAtual === progressoTotal) return false;
+  return true;
+};
+
+
 const storeFavorites = (favoritado, recipe) => {
   //guarda nos favoritos a receita se o usuario clicar no botão favoritar
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe.localStorage;
@@ -92,18 +106,18 @@ const storeFavorites = (favoritado, recipe) => {
 const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
   const [favoritado, setFavoritado] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [finalizar, setFinalizar] = useState(true);
   
   const rotaEid = rota(pathname);
   const { id, comidaOuBebida } = rotaEid;
   
   const dispatch = useDispatch();
-
   useEffect(() => {
     const receitaDetalhada = recipeDetailsThunk(comidaOuBebida, id);
     favoriteChecker(id, setFavoritado);
     dispatch(receitaDetalhada);
   }, [dispatch, id, comidaOuBebida]);
-
+  
   if (carregando) return <p>Loading</p>;
   if (redirect) return <Redirect to="/receitas-feitas" />;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions } = recipe;
@@ -135,6 +149,7 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
           measure: measures[index],
           comidaOuBebida,
           id,
+          onChange: () => shouldUnlock(ingredients, id, comidaOuBebida),
         };
         return <Checkbox key={`${ingredient}${index}`} data={data} />;
       })}
@@ -142,7 +157,7 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
       <button
         className="start-recipe-btn"
         data-testid="finish-recipe-btn"
-        disabled={true}
+        disabled={shouldUnlock(ingredients, id, comidaOuBebida)}
         onClick={() => {
           toggleTrueFalse(redirect, setRedirect);
           salvarReceita(recipe.localStorage)

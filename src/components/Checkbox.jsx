@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './receitasEmProcesso.css';
 
 const riscaTexto = (id) => {
   //adiciona a classe textoRiscado no botão clicado
-  document.getElementById(id).classList.add('textoRiscado');
+  const elemento = document.getElementById(id);
+  elemento.classList.add('textoRiscado');
 };
 
 const idKey = (localStorage, key, idElemento, id) => {
@@ -31,13 +32,24 @@ const keyConstructor = (id, itensLocalStorage, idElemento, bemidas) => {
   }
 };
 
+const progressChecker = (id, comidaOuBebida, idElemento) => {
+  const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
+  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
+  let key = comidaOuBebida;
+  (key === 'comidas') ? key = 'meals' : key = 'cocktails';
+  const categoriaAtual = inProgressRecipes[key];
+  if (categoriaAtual[id] === undefined) return null;
+  if (categoriaAtual[id].includes(idElemento)) document.getElementById(idElemento).className="textoRiscado";
+  return categoriaAtual[id].includes(idElemento);
+};
 
 const Checkbox = ({ data }) => {
-  const { ingredient, index, measure, comidaOuBebida, id } = data;
+  const { ingredient, index, measure, comidaOuBebida, id, onChange } = data;
+  const idElemento = `${ingredient}${index}`;
+  const [checked, setChecked] = useState(true);
 
   const storeIngredients = () => {
     //chama a função que monta as chaves para mandar para o local storage
-    const idElemento = `${ingredient}${index}`;
     const inProgressRecipes = {
       cocktails: {},
       meals: {},
@@ -51,12 +63,13 @@ const Checkbox = ({ data }) => {
     const chamadaInicial = keyConstructor(id, inProgressRecipes, idElemento, comidaOuBebida);
     return localStorage.setItem('inProgressRecipes', JSON.stringify(chamadaInicial));
   };
-
-  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    setChecked(progressChecker(id, comidaOuBebida, idElemento))
+  }, [id, comidaOuBebida, idElemento]);
   return (
     <div key={`${ingredient}${measure}`}>
-      <label htmlFor={`${ingredient}${index}`}
-        id={`${ingredient}${index}${index}`}
+      <label
+        id={`${ingredient}${index}`}
         data-testid={`${index}-ingredient-step`}
       >
         <input
@@ -64,13 +77,12 @@ const Checkbox = ({ data }) => {
           id={`${ingredient}${index}`}
           type="checkbox"
           checked={checked}
-          disabled={checked}
-          value={`${ingredient}${index}`}
           onChange={() => {
-            riscaTexto(`${ingredient}${index}${index}`);
+            riscaTexto(`${ingredient}${index}`);
             setChecked(!checked);
             storeIngredients();
           }}
+          disabled={checked}
         />{`${ingredient}${(measure === null) ? '' : ` - ${measure}`}`}
       </label>
     </div>

@@ -103,7 +103,7 @@ describe('Ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado
   });
 });
 
-describe.only('O estado do progresso deve ser mantido caso a pessoa atualize a pagina ou volte para a mesma receita', () => {
+describe('O estado do progresso deve ser mantido caso a pessoa atualize a pagina ou volte para a mesma receita', () => {
   it('salva o progresso de uma receita de comida em andamento', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
@@ -407,7 +407,7 @@ describe('A mesma lógica de favoritar e compartilhar da tela de detalhes de uma
   });
 });
 
-describe('O botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
+describe.only('O botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
   it('verifica se botão para finalizar está desabilitado em receitas de comidas', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
