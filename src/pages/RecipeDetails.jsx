@@ -92,7 +92,7 @@ const isItInProgress = (bemidas, idAtual) => {
   if (bemidas === 'comidas') {
     return meals[idAtual] ? true : false;
   }
-  if (bemidas === 'comidas') {
+  if (bemidas === 'bebidas') {
     return cocktails[idAtual] ? true : false;
   }
 };
@@ -114,7 +114,7 @@ const RecipeDetails = (props) => {
     const recomendations = recipeRecomendationsThunk(bemidas);
     dispatch(recomendations);
     dispatch(receitaDetalhada);
-  }, [dispatch, pathname]);
+  }, [dispatch, pathname, bemidas, id]);
   if (props.loading) return <p>Loading</p>;
   if (redirectProgresso) return <Redirect to={`${pathname}/in-progress`} />;
   return (
