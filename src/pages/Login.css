@@ -24,6 +24,7 @@
   box-sizing: border-box;
   height: 58px;
   margin-bottom: 20px;
+  outline: none;
   padding-left: 15px;
   width: 80%;
 }

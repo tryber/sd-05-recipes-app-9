@@ -31,6 +31,11 @@ const Card = (props) => {
   const handleClickShare = () => {
     copy(`http://localhost:3000/${item.type}s/${item.id}`);
     document.getElementById(`share-btn-${item.id}`).innerHTML = 'Link copiado!';
+    setTimeout(() => {
+      document.getElementById(`share-btn-${item.id}`).innerHTML = '';
+      document.getElementById(`share-btn-${item.id}`).innerHTML = `<img data-testid={${index}-horizontal-share-btn} src=${shareIcon} alt="share" />`;
+    }
+    , 3000);
   };
 
   const handleClickFavorite = () => {

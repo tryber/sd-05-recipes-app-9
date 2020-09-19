@@ -60,6 +60,14 @@
   width: 5vw;
 }
 
+.share-div button{
+  color: green;
+  font-size: 7px;
+  outline: none;
+  padding: 0;
+  width: 10vw;
+}
+
 .type {
   font-size: 80%;
   color:rgb(121, 118, 121);

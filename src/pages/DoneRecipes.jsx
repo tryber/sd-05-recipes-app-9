@@ -9,10 +9,16 @@ import './DoneRecipes.css';
 
 const copy = require('clipboard-copy');
 
-const copyText = (type, id) => {
+const copyText = (type, id, index) => {
   const link = `http://localhost:3000/${type}s/${id}`;
   document.getElementById(`share-btn-${id}`).innerText = 'Link copiado!';
   copy(link);
+  console.log(document.getElementById(`share-btn-${id}`))
+  setTimeout(() => {
+    document.getElementById(`share-btn-${id}`).innerHTML = '';
+    document.getElementById(`share-btn-${id}`).innerHTML = `<img data-testid={${index}-horizontal-share-btn} src=${shareIcon} alt="share" />`;
+  }
+  , 3000);
 };
 
 function Card({ recipe, index }) {
@@ -31,7 +37,7 @@ function Card({ recipe, index }) {
               <p className="type" data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p> :
               <p className="type" data-testid={`${index}-horizontal-top-text`}>{`${alcoholicOrNot} - ${category}`}</p>
           }
-          <button id={`share-btn-${id}`} onClick={() => copyText(type, id)}>
+          <button id={`share-btn-${id}`} onClick={() => copyText(type, id, index)}>
             <img data-testid={`${index}-horizontal-share-btn`} src={shareIcon} alt="share" />
           </button>
         </div>

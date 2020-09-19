@@ -70,3 +70,12 @@ h4 {
 .share-unlike img {
   width: 80%;
 }
+
+.share-unlike button {
+  color: green;
+  font-size: 10px;
+  margin-top: 5vh;
+  outline: none;
+  padding: 0;
+  width: 8vw;
+}
