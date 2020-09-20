@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './MainCardExplore.css';
 
 const MainCardExplore = (props) => {
   const { recipe, index, match } = props;
@@ -10,7 +11,7 @@ const MainCardExplore = (props) => {
   if (isItFood) {
     return (
       <Link to={{ pathname: `/${match}`, state: ingrediente }}>
-        <button data-testid={`${index}-ingredient-card`}>
+        <button data-testid={`${index}-ingredient-card`} className="card">
           <img src={`https://www.themealdb.com/images/ingredients/${ingrediente}-Small.png`} data-testid={`${index}-card-img`} alt="Card" />
           <p data-testid={`${index}-card-name`}>{ingrediente}</p>
         </button>
@@ -19,7 +20,7 @@ const MainCardExplore = (props) => {
   }
   return (
     <Link to={{ pathname: `/${match}`, state: ingrediente }}>
-      <button data-testid={`${index}-ingredient-card`}>
+      <button data-testid={`${index}-ingredient-card`} className="card">
         <img src={`https://www.thecocktaildb.com/images/ingredients/${ingrediente}-Small.png`} data-testid={`${index}-card-img`} alt="Card" />
         <p data-testid={`${index}-card-name`}>{ingrediente}</p>
       </button>

@@ -7,6 +7,8 @@ import { saveRecipes, receiveDataIngredientsMeal, receiveDataIngredientsDrink } 
 import MainCard from '../components/MainCard';
 import CategoriesFilter from '../components/CategoriesFilter';
 import Header from '../components/Header';
+import './RecipesMainScreen.css';
+import loader from '../images/loader1.gif';
 
 async function fetchData(dispatch, setIsLoading) {
   setIsLoading(true);
@@ -98,7 +100,7 @@ export default function RecipesMainScreen(props) {
             <MainCard index={index} recipe={drink} key={drink.strDrink} match={match.path} />) :
           <RenderDrinks match={match} />)
         }
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <img className="loader" alt="loader" src={loader} />}
       </div>
       <BottomMenu />
     </div>

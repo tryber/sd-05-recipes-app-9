@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoriesFilter, selectCategory, loadingCategoryRecipes } from '../actions';
+import { setCategoriesFilter, selectCategory, loadingCategoryRecipes, isCategoryFiltered, clearDataMeals, clearDataDrinks } from '../actions';
 import { fetchRecipesByCategory } from '../services/api';
+import './CategoryButton.css';
 
 function fetchData(match, category, dispatch) {
   dispatch(loadingCategoryRecipes(true));
@@ -32,9 +33,13 @@ export default function CategoryButton(props) {
   return (
     <div>
       <button
+        className="category-button-filter"
         data-testid={`${categoryName}-category-filter`}
         onClick={(event) => {
           verifyFetch(match, event, categoriesFetched, dispatch);
+          match.path === '/comidas' ?
+          dispatch(clearDataMeals()) : dispatch(clearDataDrinks());
+          dispatch(isCategoryFiltered(true));
           return (event.target.name === selectedCategory) ?
           dispatch(selectCategory('All')) :
           dispatch(selectCategory(event.target.name));

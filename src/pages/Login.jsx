@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import './Login.css';
 
 const disabledStatus = (email, senha) => {
   const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
@@ -33,27 +34,34 @@ const Login = () => {
   if (redirect) return <Redirect to="/comidas" />;
 
   return (
-    <div>
-      <h1>Faça Login</h1>
-      <input
-        type="text"
-        name="email"
-        data-testid="email-input"
-        onChange={(event) => handleChange(event)}
-        value={email}
-      />
-      <input
-        type="password"
-        name="senha"
-        data-testid="password-input"
-        onChange={(event) => handleChange(event)}
-        value={senha}
-      />
-      <button
-        data-testid="login-submit-btn"
-        disabled={disabled}
-        onClick={() => clickHandler()}
-      >Entrar</button>
+    <div className="login--main-container">
+      {/* <h1>Faça Login</h1> */}
+      <div className="login--inputs-button">
+        <input
+          type="text"
+          name="email"
+          data-testid="email-input"
+          onChange={(event) => handleChange(event)}
+          value={email}
+          className="login-input"
+          placeholder="E-mail"
+        />
+        <input
+          type="password"
+          name="senha"
+          data-testid="password-input"
+          onChange={(event) => handleChange(event)}
+          value={senha}
+          className="login-input"
+          placeholder="Password"
+        />
+        <button
+          data-testid="login-submit-btn"
+          disabled={disabled}
+          onClick={() => clickHandler()}
+          className="login-button"
+        >Entrar</button>
+      </div>
     </div>
   );
 };

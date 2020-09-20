@@ -1,10 +1,11 @@
-import { SAVE_CATEGORIES, SET_RECIPES_BY_CATEGORY, SELECTED_CATEGORY, LOADING_CATEGORY_RECIPES, RESET_CATEGORIES } from '../actions';
+import { SAVE_CATEGORIES, SET_RECIPES_BY_CATEGORY, SELECTED_CATEGORY, LOADING_CATEGORY_RECIPES, RESET_CATEGORIES, IS_CATEGORY_FILTERED } from '../actions';
 
 const INITIAL_STATE = {
   categories: [],
   categoriesFilter: [],
   selectedCategory: 'All',
   isLoading: false,
+  categoryFiltered: false,
 };
 
 export default function categoriesReducer(state = INITIAL_STATE, action) {
@@ -41,6 +42,11 @@ export default function categoriesReducer(state = INITIAL_STATE, action) {
         categoriesFilter: [],
         selectedCategory: 'All',
       });
+    case IS_CATEGORY_FILTERED:
+      return ({
+        ...state,
+        categoryFiltered: action.categoryFiltered,
+      })
     default:
       return state;
   }

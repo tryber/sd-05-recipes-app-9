@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { fetchAllIngredientsMeals, fetchAllIngredientsDrinks } from '../services/api';
 import MainCardExplore from './MainCardExplore';
+import './IngredientsContent.css';
+import loader from '../images/loader1.gif';
 
 const IngredientsContent = (props) => {
   const { location: { pathname } } = props.props;
@@ -26,10 +28,14 @@ const IngredientsContent = (props) => {
     }
   }, [isItDrinks, isItFood, loading]);
 
-  if (loading) return (<div>Loading...</div>);
+  if (loading) return (
+    <div className="ingredients">
+      <img className="loader" alt="loader" src={loader} />
+    </div>
+  );
   if (dataFood.length > 0) {
     return (
-      <div>
+      <div className="ingredients">
         { dataFood.map((meal, index) =>
           <MainCardExplore index={index} recipe={meal} key={meal.strIngredient} match={'comidas'} />)
         }
@@ -37,7 +43,7 @@ const IngredientsContent = (props) => {
     );
   }
   return (
-    <div>
+    <div className="ingredients">
       {dataDrinks.map((drink, index) =>
         <MainCardExplore index={index} recipe={drink} key={drink.strIngredient1} match={'bebidas'} />)
       }

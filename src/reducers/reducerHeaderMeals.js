@@ -1,4 +1,4 @@
-import { REQUEST_DATA, RECEIVE_DATA_MEALS, RECEIVE_DATA_INGREDIENTS_MEAL } from '../actions/index';
+import { REQUEST_DATA, RECEIVE_DATA_MEALS, RECEIVE_DATA_INGREDIENTS_MEAL, CLEAR_DATA_MEALS } from '../actions/index';
 
 const INITIAL_STATE = {
   loading: true,
@@ -26,7 +26,12 @@ function reducerHeaderMeals(state = INITIAL_STATE, action) {
         loading: false,
         data: (action.data.meals === null) ? [] : action.data.meals.slice(0, 12),
       };
-
+    case CLEAR_DATA_MEALS:
+      return {
+        ...state,
+        loading: true,
+        data: [],
+      }
     default:
       return state;
   }

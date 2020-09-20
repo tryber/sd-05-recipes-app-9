@@ -1,0 +1,21 @@
+.menu {
+  background-color: white;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  align-content: center;
+  height: 55px;
+  width: 100%;
+  border-top: 1px solid rgb(242, 242, 242);
+}
+
+img {
+  width: 110%;
+}
+
+.menu button {
+  outline: none;
+}
