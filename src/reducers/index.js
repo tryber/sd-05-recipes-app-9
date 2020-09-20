@@ -5,6 +5,7 @@ import recipesReducer from './recipesReducer';
 import categoriesReducer from './categoriesReducer';
 import reducerHeaderDrinks from './reducerHeaderDrinks';
 import reducerHeaderMeals from './reducerHeaderMeals';
+import valorDoDisabled from './finishRecipeButton';
 
 const rootReducers = combineReducers({
   recipesReducer,
@@ -13,6 +14,7 @@ const rootReducers = combineReducers({
   reducerHeaderMeals,
   detailsFetch,
   recomendation,
+  valorDoDisabled,
 });
 
 export default rootReducers;

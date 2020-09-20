@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { destravar } from '../actions/finishRecipeButton';
 import './receitasEmProcesso.css';
 
 const riscaTexto = (id) => {
@@ -33,13 +35,14 @@ const keyConstructor = (id, itensLocalStorage, idElemento, bemidas) => {
 };
 
 const progressChecker = (id, comidaOuBebida, idElemento) => {
+  //checa se o checkbox atual está marcado
   const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
   JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
   let key = comidaOuBebida;
   (key === 'comidas') ? key = 'meals' : key = 'cocktails';
   const categoriaAtual = inProgressRecipes[key];
-  if (inProgressRecipes === false) return null;
-  if (categoriaAtual[id] === undefined) return null;
+  if (inProgressRecipes === false) return false;
+  if (categoriaAtual[id] === undefined) return false;
   if (categoriaAtual[id].includes(idElemento)) {
     document.getElementById(idElemento).className="textoRiscado";
   }
@@ -50,6 +53,7 @@ const Checkbox = ({ data }) => {
   const { ingredient, index, measure, comidaOuBebida, id, onChange } = data;
   const idElemento = `${ingredient}${index}`;
   const [checked, setChecked] = useState(true);
+  const dispatch = useDispatch();
 
   const storeIngredients = () => {
     //chama a função que monta as chaves para mandar para o local storage
@@ -81,9 +85,12 @@ const Checkbox = ({ data }) => {
           type="checkbox"
           checked={checked}
           onChange={() => {
+            console.log('irineu')
             riscaTexto(`${ingredient}${index}`);
             setChecked(!checked);
             storeIngredients();
+            onChange();
+            dispatch(destravar(onChange()));
           }}
           disabled={checked}
         />{`${ingredient}${(measure === null) ? '' : ` - ${measure}`}`}
