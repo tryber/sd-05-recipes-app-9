@@ -68,6 +68,12 @@ export function fetchIngredientsDrinks(input) {
     }));
 }
 
+export function fetchIngredientsDrinksWithoutText(input) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${input}`;
+  return fetch(URL)
+    .then((response) => response.json());
+}
+
 export function randomFood() {
   const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
   return fetch(URL)
@@ -76,6 +82,34 @@ export function randomFood() {
 
 export function randomDrink() {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  return fetch(URL)
+    .then((data) => data.json());
+}
+
+export function fetchAreas() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  return (
+    fetch(URL)
+    .then((data) => data.json())
+  );
+}
+
+export function fetchRecipesByArea(area) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
+  return (
+    fetch(URL)
+    .then((data) => data.json())
+  );
+}
+
+export function fetchAllIngredientsMeals() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+  return fetch(URL)
+    .then((data) => data.json());
+}
+
+export function fetchAllIngredientsDrinks() {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
   return fetch(URL)
     .then((data) => data.json());
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
 import ProfileButton from '../components/ProfileButton';
+import BottomMenu from '../components/BottomMenu';
 
 export default function Perfil(props) {
-  const email = JSON.parse(localStorage.getItem('user')).email;
+  const user = JSON.parse(localStorage.getItem('user')) || '';
   return (
     <div>
       <Header props={props} />
-      <h2 data-testid="profile-email">{email}</h2>
+      <h2 data-testid="profile-email">{user.email || ''}</h2>
       <ProfileButton
         content="Receitas Feitas"
         link="/receitas-feitas"
@@ -24,6 +25,7 @@ export default function Perfil(props) {
         dataTestId="profile-logout-btn"
         onClick={() => localStorage.clear()}
       />
+      <BottomMenu />
     </div>
   );
 }

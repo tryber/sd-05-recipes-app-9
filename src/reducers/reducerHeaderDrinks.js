@@ -14,14 +14,17 @@ function reducerHeaderDrinks(state = INITIAL_STATE, action) {
       };
     case RECEIVE_DATA_DRINKS:
       return {
+        ...state,
         loading: false,
         data: (action.data.drinks === null) ? [] : action.data.drinks.slice(0, 12),
       };
     case RECEIVE_DATA_INGREDIENTS_DRINK:
       return {
+        ...state,
         loading: false,
         data: (action.data === null) ? [] : action.data.drinks.slice(0, 12),
       };
+
     default:
       return state;
   }

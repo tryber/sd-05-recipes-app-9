@@ -1,0 +1,30 @@
+.conteudo {
+  padding: 10px;
+}
+
+.left {
+  background-color: black;
+  width: 30%;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.containerCard {
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.filterButtons {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
