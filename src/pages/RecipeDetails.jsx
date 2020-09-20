@@ -5,14 +5,11 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { recipeDetailsThunk } from '../actions/recipeDetails';
 import Lista from '../components/Lista';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import Recomedations from '../components/Recomendations';
 import { recipeRecomendationsThunk } from '../actions/recomendations';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
 import './RecipeDetails.css';
-
-const copy = require('clipboard-copy');
 
 const onCoTo = (pathname) => {
   const caminhos = pathname.split('/');
@@ -30,53 +27,6 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
   setTrueFalse(!bool)
 );
 
-const copyText = (pathname) => {
-  const link = `http://localhost:3000${pathname}`;
-  document.getElementById('share-btn').innerText = 'Link copiado!';
-  copy(link);
-};
-
-const storeFavorites = (favoritado, recipe) => {
-  const { id, type, area, category, alcoholicOrNot, name, image } = recipe.localStorage;
-  let receitasFavoritas = localStorage.getItem('favoriteRecipes');
-
-  if (receitasFavoritas !== undefined && receitasFavoritas !== '') {
-    receitasFavoritas = JSON.parse(receitasFavoritas);
-  }
-
-  const novaReceita = {
-    id,
-    type,
-    area,
-    category,
-    alcoholicOrNot,
-    name,
-    image,
-  };
-
-  if (favoritado) {
-    receitasFavoritas = receitasFavoritas.filter((receita) => receita.id !== novaReceita.id);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify(receitasFavoritas));
-  }
-
-  if (receitasFavoritas !== undefined && receitasFavoritas !== null &&
-      receitasFavoritas.length !== 0) {
-    receitasFavoritas = [...receitasFavoritas, novaReceita];
-    return localStorage.setItem('favoriteRecipes', JSON.stringify(receitasFavoritas));
-  }
-
-  return localStorage.setItem('favoriteRecipes', JSON.stringify([novaReceita]));
-};
-
-const favoriteChecker = (id, setFavoritado) => {
-  let receitasFavoritas = localStorage.getItem('favoriteRecipes');
-  if (receitasFavoritas) {
-    receitasFavoritas = JSON.parse(receitasFavoritas);
-    const receitaNoLocalStorage = receitasFavoritas.find((receita) => receita.id === id);
-    if (receitaNoLocalStorage) setFavoritado(true);
-  }
-};
-
 const isItDone = (idAtual) => {
   const doneRecipes = localStorage.getItem('doneRecipes') ?
   JSON.parse(localStorage.getItem('doneRecipes')) : false;
@@ -84,32 +34,24 @@ const isItDone = (idAtual) => {
   return doneRecipes.some((receita) => (receita.id === idAtual));
 };
 
-const isItInProgress = (bemidas, idAtual) => {
+const isItInProgress = (comidaOuBebida, idAtual) => {
   const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
   JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
   if (inProgressRecipes === false) return inProgressRecipes;
-  const { meals, cocktails } = inProgressRecipes;
-  if (bemidas === 'comidas') {
-    return meals[idAtual] ? true : false;
-  }
-  if (bemidas === 'bebidas') {
-    return cocktails[idAtual] ? true : false;
-  }
+  let key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
+  return inProgressRecipes[key][idAtual] ? true : false;
 };
 
 const RecipeDetails = (props) => {
   const { recipe, location: { pathname } } = props;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions, video } = recipe;
-
-  const [favoritado, setFavoritado] = useState(false);
   const [redirectProgresso, setRedirectProgresso] = useState(false);
   const dispatch = useDispatch();
 
   const params = onCoTo(pathname);
-  const { id, bemidas } = params
+  const { id, bemidas } = params;
   useEffect(() => {
     isItDone(id);
-    favoriteChecker(id, setFavoritado);
     const receitaDetalhada = recipeDetailsThunk(bemidas, id);
     const recomendations = recipeRecomendationsThunk(bemidas);
     dispatch(recomendations);
@@ -123,20 +65,8 @@ const RecipeDetails = (props) => {
       <h1 data-testid="recipe-title">{drinkOrFood}</h1>
       <h2 data-testid="recipe-category">{category}</h2>
       {(ingredientData) && <Lista data={ingredientData} />}
-      <button id="share-btn" onClick={() => copyText(pathname)} >
-        <img data-testid="share-btn" src={shareIcon} alt="share" />
-      </button>
-      <button
-        onClick={() => {
-          toggleTrueFalse(favoritado, setFavoritado);
-          storeFavorites(favoritado, recipe);
-        }}
-      >
-        <img
-          data-testid="favorite-btn"
-          src={favoritado ? blackHeartIcon : whiteHeartIcon} alt="love"
-        />
-      </button>
+      <ShareButton pathname={pathname} />
+      <FavoriteButton recipe={recipe} id={id} />
       <p data-testid="instructions" >{instructions}</p>
       {(video) && videoEmbeder(video)}
       <Recomedations />

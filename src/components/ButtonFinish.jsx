@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { destravar } from '../actions/finishRecipeButton';
 
 const toggleTrueFalse = (bool, setTrueFalse) => (
@@ -15,7 +16,7 @@ const salvarReceita = (receita) => {
   let doneRecipes = localStorage.getItem('doneRecipes');
   if (doneRecipes) {
     doneRecipes = JSON.parse(doneRecipes);
-    const vaiProLocalStorage = [...doneRecipes, receitaAtual]
+    const vaiProLocalStorage = [...doneRecipes, receitaAtual];
     return localStorage.setItem('doneRecipes', JSON.stringify(vaiProLocalStorage));
   }
   return localStorage.setItem('doneRecipes', JSON.stringify([receitaAtual]));
@@ -29,19 +30,24 @@ const ButtonFinish = ({ data, finalizar }) => {
 	}, [unlock, dispatch]);
 	return (
 		<button
-		className="start-recipe-btn"
-		data-testid="finish-recipe-btn"
-		disabled={finalizar ? true : false}
-		onClick={() => {
-			toggleTrueFalse(redirState, redirecionar());
-			salvarReceita(recipe.localStorage)
-		}}
-	>Finalizar receita</button>
+      className="start-recipe-btn"
+      data-testid="finish-recipe-btn"
+      disabled={finalizar}
+      onClick={() => {
+        toggleTrueFalse(redirState, redirecionar());
+        salvarReceita(recipe.localStorage);
+      }}
+	  >Finalizar receita</button>
 	)
-}
+};
 
 const mapStateToProps = (state) => ({
 	finalizar: state.valorDoDisabled.finishButton,
 });
+
+ButtonFinish.propTypes = {
+  data: PropTypes.instanceOf(Object).isRequired,
+  finalizar: PropTypes.bool.isRequired,
+};
 
 export default connect(mapStateToProps)(ButtonFinish);

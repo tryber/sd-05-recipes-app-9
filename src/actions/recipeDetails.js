@@ -4,7 +4,6 @@ export const SUCESSO = 'SUCESSO';
 export const CARREGANDO = 'CARREGANDO';
 
 function sucesso(receita) {
-  console.log(receita)
   return {
     type: SUCESSO,
     recipe: receita.meals ? receita.meals[0] : receita.drinks[0],
