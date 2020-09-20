@@ -7,7 +7,8 @@ import ExploreDrink from './pages/ExploreDrink';
 import RecipesMainScreen from './pages/RecipesMainScreen';
 import Login from './pages/Login';
 import RecipeDetails from './pages/RecipeDetails';
-import Teste from './components/TesteTelaReceitaEmProgresso';
+import ReceitasEmProcesso from './pages/ReceitasEmProcesso';
+// import Teste from './components/TesteTelaReceitaEmProgresso';
 import ExploreIngredients from './pages/ExploreIngredients';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Perfil from './pages/Profile';
@@ -33,9 +34,10 @@ function App() {
         <Route exact path="/receitas-favoritas" component={FavoriteRecipes} />
         <Route exact path="/comidas/:id" component={RecipeDetails} />
         <Route exact path="/bebidas/:id" component={RecipeDetails} />
+        <Route path="/bebidas/:id/in-progress" component={ReceitasEmProcesso} />
+        <Route path="/comidas/:id/in-progress" component={ReceitasEmProcesso} />
         <Route exact path="/explorar/comidas/ingredientes" component={ExploreIngredients} />
         <Route exact path="/explorar/bebidas/ingredientes" component={ExploreIngredients} />
-        <Route path="/in-progress" component={Teste} />
         <Route exact path="/perfil" component={Perfil} />
         <Route exact path="/" component={Login} />
       </Switch>
