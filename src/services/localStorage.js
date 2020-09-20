@@ -11,7 +11,7 @@ export const storeFavorites = (favoritado, recipe) => {
   } = recipe.localStorage;
   let receitasFavoritas = localStorage.getItem('favoriteRecipes');
 
-  if (receitasFavoritas !== undefined && receitasFavoritas !=='') {
+  if (receitasFavoritas !== undefined && receitasFavoritas !== '') {
     receitasFavoritas = JSON.parse(receitasFavoritas);
   }
   const novaReceita = {
@@ -30,7 +30,7 @@ export const storeFavorites = (favoritado, recipe) => {
     );
     return localStorage.setItem(
       'favoriteRecipes',
-      JSON.stringify(receitasFavoritas)
+      JSON.stringify(receitasFavoritas),
     );
   }
 
@@ -45,7 +45,7 @@ export const storeFavorites = (favoritado, recipe) => {
       JSON.stringify(receitasFavoritas),
     );
   }
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([novaReceita]));
+  return localStorage.setItem('favoriteRecipes', JSON.stringify([novaReceita]));
 };
 
 export const favoriteChecker = (id, setFavoritado) => {
