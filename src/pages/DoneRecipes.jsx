@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
@@ -46,7 +45,7 @@ function Card({ recipe, index }) {
         </Link>
         <p className="date" data-testid={`${index}-horizontal-done-date`}>Feita em: {doneDate}</p>
         <div className="tags">
-          {tags.map((tagName) => <p className="tag" data-testid={`${index}-${tagName}-horizontal-tag`}>{tagName}</p>)}
+          {tags.map((tagName) => <p className="tag" data-testid={`${index}-${tagName}-horizontal-tag`} key={tagName}>{tagName}</p>)}
         </div>
       </div>
     </div>
@@ -93,37 +92,8 @@ function filterRecipes(recipes, filter) {
   );
 }
 
-const mockDoneRecipes = [
-  {
-    id: '52771',
-    type: 'comida',
-    area: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: ['Pasta', 'Curry'],
-  },
-  {
-    id: '178319',
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot:  'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    doneDate: '23/06/2020',
-    tags: [],
-  },
-];
-
 export default function DoneRecipes(props) {
   const [filter, setFilter] = useState('All');
-
-  useEffect(() => {
-    localStorage.setItem('doneRecipes', JSON.stringify(mockDoneRecipes));
-  }, [])
 
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
   return (
