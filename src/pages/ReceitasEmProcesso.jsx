@@ -29,7 +29,7 @@ const agradoAoCC = (key, id, inProgressRecipes, ingredients) => {
     return false;
   }
   return true;
-}
+};
 
 const shouldUnlock = (ingredients, id, comidaOuBebida) => {
   // vê se o botão finalizar deveria ser desbloqueado
