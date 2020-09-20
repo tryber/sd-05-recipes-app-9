@@ -5,14 +5,11 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { recipeDetailsThunk } from '../actions/recipeDetails';
 import Lista from '../components/Lista';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
-import Recomendations from '../components/Recomendations';
+import Recomedations from '../components/Recomendations';
 import { recipeRecomendationsThunk } from '../actions/recomendations';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
 import './RecipeDetails.css';
-
-const copy = require('clipboard-copy');
 
 const onCoTo = (pathname) => {
   const caminhos = pathname.split('/');
@@ -30,102 +27,55 @@ const toggleTrueFalse = (bool, setTrueFalse) => (
   setTrueFalse(!bool)
 );
 
-const copyText = (pathname) => {
-  const link = `http://localhost:3000${pathname}`;
-  document.getElementById('share-btn').innerText = 'Link copiado!';
-  copy(link);
+const isItDone = (idAtual) => {
+  const doneRecipes = localStorage.getItem('doneRecipes') ?
+  JSON.parse(localStorage.getItem('doneRecipes')) : false;
+  if (doneRecipes === false) return doneRecipes;
+  return doneRecipes.some((receita) => (receita.id === idAtual));
 };
 
-const storeFavorites = (favoritado, recipe) => {
-  const { id, type, area, category, alcoholicOrNot, name, image } = recipe.localStorage;
-  let receitasFavoritas = localStorage.getItem('favoriteRecipes');
-
-  if (receitasFavoritas !== undefined && receitasFavoritas !== '') {
-    receitasFavoritas = JSON.parse(receitasFavoritas);
-  }
-
-  const novaReceita = {
-    id,
-    type,
-    area,
-    category,
-    alcoholicOrNot,
-    name,
-    image,
-  };
-
-  if (favoritado) {
-    receitasFavoritas = receitasFavoritas.filter((receita) => receita.id !== novaReceita.id);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify(receitasFavoritas));
-  }
-
-  if (receitasFavoritas !== undefined && receitasFavoritas !== null &&
-      receitasFavoritas.length !== 0) {
-    receitasFavoritas = [...receitasFavoritas, novaReceita];
-    return localStorage.setItem('favoriteRecipes', JSON.stringify(receitasFavoritas));
-  }
-
-  return localStorage.setItem('favoriteRecipes', JSON.stringify([novaReceita]));
-};
-
-const favoriteChecker = (id, setFavoritado) => {
-  let receitasFavoritas = localStorage.getItem('favoriteRecipes');
-  if (receitasFavoritas) {
-    receitasFavoritas = JSON.parse(receitasFavoritas);
-    const receitaNoLocalStorage = receitasFavoritas.find((receita) => receita.id === id);
-    if (receitaNoLocalStorage) setFavoritado(true);
-  }
+const isItInProgress = (comidaOuBebida, idAtual) => {
+  const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
+  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
+  const key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
+  if (inProgressRecipes[key][idAtual]) return true;
+  return false;
 };
 
 const RecipeDetails = (props) => {
   const { recipe, location: { pathname } } = props;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions, video } = recipe;
-
-  const [favoritado, setFavoritado] = useState(false);
   const [redirectProgresso, setRedirectProgresso] = useState(false);
   const dispatch = useDispatch();
 
+  const params = onCoTo(pathname);
+  const { id, bemidas } = params;
   useEffect(() => {
-    const params = onCoTo(pathname);
-    favoriteChecker(params.id, setFavoritado);
-    const receitaDetalhada = recipeDetailsThunk(params.bemidas, params.id);
-    const recomendations = recipeRecomendationsThunk(params.bemidas);
+    isItDone(id);
+    const receitaDetalhada = recipeDetailsThunk(bemidas, id);
+    const recomendations = recipeRecomendationsThunk(bemidas);
     dispatch(recomendations);
     dispatch(receitaDetalhada);
-  }, [dispatch, pathname]);
-
+  }, [dispatch, pathname, bemidas, id]);
   if (props.loading) return <p>Loading</p>;
   if (redirectProgresso) return <Redirect to={`${pathname}/in-progress`} />;
-
   return (
     <div>
       <img data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
       <h1 data-testid="recipe-title">{drinkOrFood}</h1>
       <h2 data-testid="recipe-category">{category}</h2>
       {(ingredientData) && <Lista data={ingredientData} />}
-      <button id="share-btn" onClick={() => copyText(pathname)} >
-        <img data-testid="share-btn" src={shareIcon} alt="share" />
-      </button>
-      <button
-        onClick={() => {
-          toggleTrueFalse(favoritado, setFavoritado);
-          storeFavorites(favoritado, recipe);
-        }}
-      >
-        <img
-          data-testid="favorite-btn"
-          src={favoritado ? blackHeartIcon : whiteHeartIcon} alt="love"
-        />
-      </button>
+      <ShareButton pathname={pathname} />
+      <FavoriteButton recipe={recipe} id={id} />
       <p data-testid="instructions" >{instructions}</p>
       {(video) && videoEmbeder(video)}
-      <Recomendations />
+      <Recomedations />
       <button
         className="start-recipe-btn"
         data-testid="start-recipe-btn"
-        // style={{ position: 'fixed-bottom' }}
+        disabled={isItDone(id)}
         onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
-      >Começar a receita</button>
+      >{isItInProgress(bemidas, id) ? 'Continuar Receita' : 'Começar Receita'}</button>
     </div>
   );
 };

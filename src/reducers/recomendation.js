@@ -10,9 +10,10 @@ const INICIAL_STATE = {
 
 const cardAdapter = (receitas) => {
   const receitasAdaptadas = receitas.map((receita) => ({
-    imagem: receita.strMealThumb ? receita.strMealThumb : receita.strDrinkThumb,
-    title: receita.strMeal ? receita.strMeal : receita.strDrink,
+    imagem: receita.strMealThumb || receita.strDrinkThumb,
+    title: receita.strMeal || receita.strDrink,
     category: receita.strCategory,
+    id: receita.idMeal || receita.idDrink,
   }));
   return receitasAdaptadas.slice(0, 6);
 };

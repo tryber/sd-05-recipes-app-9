@@ -1,0 +1,7 @@
+.textoRiscado {
+  text-decoration: line-through;
+}
+
+.textoNormal {
+  text-decoration: none solid black;
+}
