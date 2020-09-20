@@ -20,12 +20,7 @@ const rota = (pathname) => {
   });
 };
 
-const shouldUnlock = (ingredients, id, comidaOuBebida) => {
-  // vê se o botão finalizar deveria ser desbloqueado
-  const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
-  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
-  const key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
-  if (!inProgressRecipes) return true;
+const agradoAoCC = (key, id, inProgressRecipes, ingredients) => {
   const progressoAtual = inProgressRecipes[key][id] ? inProgressRecipes[key][id].length : true;
   if (progressoAtual === true) return true;
   const progressoTotal = ingredients.filter((ing) =>
@@ -34,6 +29,15 @@ const shouldUnlock = (ingredients, id, comidaOuBebida) => {
     return false;
   }
   return true;
+}
+
+const shouldUnlock = (ingredients, id, comidaOuBebida) => {
+  // vê se o botão finalizar deveria ser desbloqueado
+  const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
+  JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
+  const key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
+  if (!inProgressRecipes) return true;
+  return agradoAoCC(key, id, inProgressRecipes, ingredients);
 };
 
 const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
