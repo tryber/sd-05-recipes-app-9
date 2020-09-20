@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
@@ -11,12 +12,14 @@ const copyText = (pathname) => {
   copy(link);
 };
 
-const ShareButton = ({ pathname }) => {
-  return (
-    <button id="share-btn" onClick={() => copyText(pathname)} >
-      <img data-testid="share-btn" src={shareIcon} alt="share" />
-    </button>
-  );
-}
+const ShareButton = ({ pathname }) => (
+  <button id="share-btn" onClick={() => copyText(pathname)} >
+    <img data-testid="share-btn" src={shareIcon} alt="share" />
+  </button>
+);
+
+ShareButton.propTypes = {
+  pathname: PropTypes.string.isRequired,
+};
 
 export default ShareButton;

@@ -41,7 +41,7 @@ const progressChecker = (id, comidaOuBebida, idElemento) => {
   // checa se o checkbox atual está marcado
   const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
   JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
-  let key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
+  const key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
   const categoriaAtual = inProgressRecipes[key];
   if (inProgressRecipes === false) return false;
   if (categoriaAtual[id] === undefined) return false;

@@ -24,9 +24,8 @@ const shouldUnlock = (ingredients, id, comidaOuBebida) => {
   // vê se o botão finalizar deveria ser desbloqueado
   const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
   JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
-  let key = comidaOuBebida;
-  (key === 'comidas') ? key = 'meals' : key = 'cocktails';
-  if (!inProgressRecipes) return true; 
+  const key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
+  if (!inProgressRecipes) return true;
   const progressoAtual = inProgressRecipes[key][id] ? inProgressRecipes[key][id].length : true;
   if (progressoAtual === true) return true;
   const progressoTotal = ingredients.filter((ing) =>
@@ -75,12 +74,12 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
       })}
       <p data-testid="instructions" >{instructions}</p>
       <ButtonFinish
-        data={{ 
+        data={{
           redirecionar: () => setRedirect,
           redirState: redirect,
           recipe,
           unlock: () => shouldUnlock(ingredients, id, comidaOuBebida),
-      }}
+        }}
       />
     </div>
   );

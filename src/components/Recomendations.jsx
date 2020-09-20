@@ -16,7 +16,7 @@ const Recomendations = ({ receitas, loading }) => {
   return (
     <div>
       <Slider {...settings}>
-        {receitas.map((receita, index) =>{
+        {receitas.map((receita, index) => {
           const number = index;
           return <RecomendationCard key={receitas[number].id} data={receita} index={index} />;
         })}

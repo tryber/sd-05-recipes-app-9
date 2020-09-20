@@ -37,8 +37,7 @@ const isItDone = (idAtual) => {
 const isItInProgress = (comidaOuBebida, idAtual) => {
   const inProgressRecipes = localStorage.getItem('inProgressRecipes') ?
   JSON.parse(localStorage.getItem('inProgressRecipes')) : false;
-  if (inProgressRecipes === false) return inProgressRecipes;
-  let key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
+  const key = comidaOuBebida === 'comidas' ? 'meals' : 'cocktails';
   return inProgressRecipes[key][idAtual] ? true : false;
 };
 
