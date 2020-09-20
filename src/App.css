@@ -1,7 +1,15 @@
+.app--main-structure {
+  height: 100vh;
+  /* padding: 10px; */
+  /* background-image: url('./images/masterchef.jpg'); */
+  font-family: 'Ubuntu', sans-serif;
+}
 
-#meals {
+
+/* #meals {
   width: 360px;
-  /* height: 540px; */
+  height: 640px;
+  border: 2px solid black;
   background: rgb(179, 177, 177);
   font-family: sans-serif;
   color: black;
@@ -21,7 +29,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  /* width: 100px; */
 }
 
 .card {
@@ -38,4 +45,4 @@
   position: fixed;
   bottom: 0;
   display: flex;
-}
+} */

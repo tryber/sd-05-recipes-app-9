@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '../services/api';
 import { saveCategories } from '../actions';
 import CategoryButton from './CategoryButton';
+import './CategoriesFilter.css';
 
 function fetchData(match) {
   return (
@@ -26,7 +27,7 @@ export default function CategoriesFilter(props) {
   }, [match, dispatch]);
 
   return (
-    <div>
+    <div className="categories-buttons">
       <CategoryButton categoryName="All" match={match} />
       {categories.map((category) =>
         <CategoryButton match={match} categoryName={category} key={category} />)}

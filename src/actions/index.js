@@ -14,6 +14,9 @@ export const LOADING_CATEGORY_RECIPES = 'LOADING_CATEGORY_RECIPES';
 export const RESET_CATEGORIES = 'RESET_CATEGORIES';
 export const SELECTED_AREA = 'SELECTED_AREA';
 export const RECIPES_BY_AREA = 'RECIPES_BY_AREA';
+export const IS_CATEGORY_FILTERED = 'IS_CATEGORY_FILTERED';
+export const CLEAR_DATA_MEALS = 'CLEAR_DATA_MEALS';
+export const CLEAR_DATA_DRINKS = 'CLEAR_DATA_DRINKS';
 
 export function saveRecipes(meals, drinks) {
   return {
@@ -58,24 +61,39 @@ export function resetCategories() {
   };
 }
 
-function requestData() {
+export function isCategoryFiltered(categoryFiltered) {
+  return {
+    type: IS_CATEGORY_FILTERED,
+    categoryFiltered,
+  }
+}
+
+export function requestData() {
   return {
     type: REQUEST_DATA,
   };
 }
 
-function receiveDataMeals(data) {
+export function receiveDataMeals(data) {
   return {
     type: RECEIVE_DATA_MEALS,
     data,
   };
 }
 
-function receiveDataDrinks(data) {
+export function receiveDataDrinks(data) {
   return {
     type: RECEIVE_DATA_DRINKS,
     data,
   };
+}
+
+export function clearDataMeals() {
+  return { type: CLEAR_DATA_MEALS };
+}
+
+export function clearDataDrinks() {
+  return { type: CLEAR_DATA_DRINKS };
 }
 
 export function receiveDataIngredientsMeal(data) {
@@ -92,6 +110,8 @@ export function receiveDataIngredientsDrink(data) {
   };
 }
 
+
+
 export function fetchMealsThunk(tipo, input) {
   return (dispatch) => {
     dispatch(requestData());
@@ -104,7 +124,7 @@ export function fetchDrinksThunk(tipo, input) {
   return (dispatch) => {
     dispatch(requestData());
     return (fetchDrinks(tipo, input))
-      .then((json) => dispatch(receiveDataDrinks(json)));
+      .then((json) => dispatch(receiveDataDrinks(json)))
   };
 }
 

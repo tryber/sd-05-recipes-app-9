@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import { fetchMealsThunk, fetchDrinksThunk, fetchIngredientsMealThunk, fetchIngredientsDrinkThunk } from '../actions/index';
+import { fetchMealsThunk, fetchDrinksThunk, fetchIngredientsMealThunk, fetchIngredientsDrinkThunk, isCategoryFiltered } from '../actions/index';
 import './Header.css';
 
 const handleClick = (setFetchType, setInitFetch, radio, input, pathname) => {
@@ -15,13 +15,25 @@ const handleClick = (setFetchType, setInitFetch, radio, input, pathname) => {
 };
 
 const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
-  setFetchType, setInitFetch, radio, pathname) => (
+  setFetchType, setInitFetch, radio, pathname, dispatch) => (
     <div className="search">
-      <input
-        type="text" value={input}
-        onChange={(event) => handleChangeInput(event.target.value)}
-        name="search-input" data-testid="search-input" className="search-input"
-      />
+      <div className="input-search-button">
+        <input
+          type="text" value={input}
+          onChange={(event) => handleChangeInput(event.target.value)}
+          name="search-input" data-testid="search-input" className="search-input"
+        />
+        <button
+          className="search-img"
+          data-testid="exec-search-btn"
+          onClick={() => {
+            dispatch(isCategoryFiltered(false));
+            return handleClick(setFetchType, setInitFetch, radio, input, pathname)
+          }}
+        >
+          <img src={searchIcon} alt="Pesquisar" />
+        </button>
+      </div>
       <div className="radiosAndFilterButton">
         <div className="ingrediente">
           <input
@@ -48,12 +60,7 @@ const inputsSearchItens = (input, handleChangeInput, handleChangeRadio,
         </div>
       </div>
       <div className="execButton">
-        <button
-          data-testid="exec-search-btn"
-          onClick={() => handleClick(setFetchType, setInitFetch, radio, input, pathname)}
-        >
-          Filtrar
-        </button>
+
       </div>
     </div>
 );
@@ -69,6 +76,7 @@ const SearchItens = (props) => {
   const loadingDrinks = useSelector((state) => state.reducerHeaderDrinks.loading);
   const dadosDrinks = useSelector((state) => state.reducerHeaderDrinks.data);
   const dadosMeals = useSelector((state) => state.reducerHeaderMeals.data);
+  const categoryFiltered = useSelector((state) => state.categoriesReducer.categoryFiltered);
   const { location: { pathname } } = props.props.props;
   const tipo = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
   const dispatch = useDispatch();
@@ -88,8 +96,8 @@ const SearchItens = (props) => {
   }, [initFetch, fetchType, dispatch, input, radio]);
 
   useEffect(() => {
-    if (loadingDrinks === false && dadosDrinks.length === 0) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    if (loadingMeals === false && dadosMeals.length === 0) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    if (loadingDrinks === false && dadosDrinks.length === 0 && !categoryFiltered) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    if (loadingMeals === false && dadosMeals.length === 0 && !categoryFiltered) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     if (loadingMeals === false && dadosMeals.length === 1 && tipo === 'comidas') {
       setPathRedirect(`/comidas/${dadosMeals[0].idMeal}`);
       setRedirect(true);
@@ -98,14 +106,14 @@ const SearchItens = (props) => {
       setPathRedirect(`/bebidas/${dadosDrinks[0].idDrink}`);
       setRedirect(true);
     }
-  }, [loadingMeals, loadingDrinks, dadosMeals, dadosDrinks, tipo]);
+  }, [loadingMeals, loadingDrinks, dadosMeals, dadosDrinks, tipo, categoryFiltered]);
 
   const handleChangeInput = (param) => setInput(param);
   const handleChangeRadio = (param) => setRadio(param);
 
   if (redirect) return (<Redirect to={pathRedirect} />);
   return inputsSearchItens(input, handleChangeInput, handleChangeRadio,
-    setFetchType, setInitFetch, radio, pathname);
+    setFetchType, setInitFetch, radio, pathname, dispatch);
 };
 
 const visibilitySearchButton = (props) => {
@@ -148,7 +156,7 @@ const Header = (props) => {
 
   if (redirect) return (<Redirect to={pathRedirect} />);
   return (
-    <div>
+    <div className="header">
       <div className="topo">
         <div>
           <button
@@ -161,7 +169,7 @@ const Header = (props) => {
         <div>
           <h1 data-testid="page-title">{titlePage(props.props)}</h1>
         </div>
-        <div>
+        <div className="search-div">
           {isVisible &&
             <button
               onClick={toogleClickedSearch}

@@ -1,0 +1,33 @@
+.card {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0,
+0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 175px;
+  margin: 10px;
+}
+
+.card img {
+  border-radius: 5px 5px 0 0;
+  height: 130px;
+  width: 100%;
+}
+
+.card a {
+  color: black;
+  margin: 10px;
+  text-decoration: none;
+  width: 40%;
+}
+
+.card p {
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  height: 36px;
+  justify-content: center;
+  margin: 0;
+  outline: none;
+  overflow: scroll;
+  padding: 3px 2px 0 3px;
+  text-decoration: none;
+}

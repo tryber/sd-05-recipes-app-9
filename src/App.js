@@ -18,7 +18,7 @@ import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
   return (
-    <div>
+    <div className="app--main-structure">
       <Switch>
         <Route
           exact path="/explorar/comidas/area"
