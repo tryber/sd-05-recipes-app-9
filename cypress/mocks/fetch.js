@@ -30,11 +30,13 @@ const fetch = (url) => Promise.resolve({
   status: 200,
   ok: true,
   json: () => {
-    if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list')
+    if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list') {
       return Promise.resolve(mealCategories);
+    }
 
-    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
-        return Promise.resolve(drinkCategories);
+    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list') {
+      return Promise.resolve(drinkCategories);
+    }
 
     if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?i=list')
       return Promise.resolve(mealIngredients);
@@ -113,8 +115,9 @@ const fetch = (url) => Promise.resolve({
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=xablau')
       return Promise.resolve(emptyDrinks);
 
-    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+    if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=') {
       return Promise.resolve(drinks);
+    }
 
     return Promise.resolve(meals);
   },
