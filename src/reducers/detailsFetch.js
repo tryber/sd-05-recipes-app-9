@@ -23,6 +23,7 @@ const agradoAoCC = (recipe) => (
   }
 );
 
+const tagReturn = (strTags) => ((strTags) ? strTags.split(',') : []);
 
 const recipeMapper = (recipe, agradandoAoCC) => {
   const { alcoholicOrNot, area, id, image, name } = agradandoAoCC;
@@ -58,7 +59,7 @@ const recipeMapper = (recipe, agradandoAoCC) => {
       area,
       image,
       name,
-      tags: recipe.strTags,
+      tags: tagReturn(recipe.strTag),
     },
   };
 };

@@ -33,7 +33,7 @@ function Card({ recipe, index }) {
           <p data-testid={`${index}-horizontal-name`}>{name}</p>
         </Link>
         <p data-testid={`${index}-horizontal-done-date`}>Feita em: {doneDate}</p>
-        {tags.map((tagName) => <p data-testid={`${index}-${tagName}-horizontal-tag`}>{tagName}</p>)}
+        {tags.map((tagName) => <p data-testid={`${index}-${tagName}-horizontal-tag`} key={tagName}>{tagName}</p>)}
       </div>
     </div>
   );
@@ -85,7 +85,7 @@ export default function DoneRecipes(props) {
       <FilterButtons setFilter={setFilter} />
       {
         filterRecipes(doneRecipes, filter).map((recipe, index) =>
-          <Card recipe={recipe} index={index} />)
+          <Card recipe={recipe} index={index} key={recipe.id} />)
       }
     </div>
   );
