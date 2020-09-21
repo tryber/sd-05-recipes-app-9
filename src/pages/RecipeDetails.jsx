@@ -10,6 +10,7 @@ import { recipeRecomendationsThunk } from '../actions/recomendations';
 import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
 import './RecipeDetails.css';
+import loader from '../images/loader1.gif';
 
 const onCoTo = (pathname) => {
   const caminhos = pathname.split('/');
@@ -58,25 +59,39 @@ const RecipeDetails = (props) => {
     dispatch(recomendations);
     dispatch(receitaDetalhada);
   }, [dispatch, pathname, bemidas, id]);
-  if (props.loading) return <p>Loading</p>;
+  if (props.loading) return <div className="loader-main"><img className="loader" alt="loader" src={loader} /></div>;
   if (redirectProgresso) return <Redirect to={`${pathname}/in-progress`} />;
   return (
-    <div>
-      <img data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
-      <h1 data-testid="recipe-title">{drinkOrFood}</h1>
-      <h2 data-testid="recipe-category">{category}</h2>
-      {(ingredientData) && <Lista data={ingredientData} />}
-      <ShareButton pathname={pathname} />
-      <FavoriteButton recipe={recipe} id={id} />
-      <p data-testid="instructions" >{instructions}</p>
-      {(video) && videoEmbeder(video)}
-      <Recomedations />
-      <button
-        className="start-recipe-btn"
-        data-testid="start-recipe-btn"
-        disabled={isItDone(id)}
-        onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
-      >{isItInProgress(bemidas, id) ? 'Continuar Receita' : 'Começar Receita'}</button>
+    <div className="details-main-container">
+      <img className="details-main-image" data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
+      <div className="details-text-container">
+        <div className="name-and-share">
+          <div className="name-and-share-title">
+            <h1 data-testid="recipe-title">{drinkOrFood}</h1>
+          </div>
+          <div className="share-fav">
+            <ShareButton pathname={pathname} />
+            <FavoriteButton recipe={recipe} id={id} />
+          </div>
+        </div>
+        <h2 className="details-cat" data-testid="recipe-category">{category}</h2>
+        <h2 className="details-subtitle">Ingredients</h2>
+        <div className="details-ingredients">
+          {(ingredientData) && <Lista data={ingredientData} />}
+        </div>
+        <h2 className="details-subtitle">Instructions</h2>
+        <p className="details-instructions" data-testid="instructions" >{instructions}</p>
+        <h2 className="details-subtitle">Video</h2>
+        {(video) && videoEmbeder(video)}
+        <h2 className="details-subtitle">Recomendations</h2>
+        <Recomedations />
+        <button
+          className="start-recipe-btn"
+          data-testid="start-recipe-btn"
+          disabled={isItDone(id)}
+          onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
+        >{isItInProgress(bemidas, id) ? 'Continuar Receita' : 'Começar Receita'}</button>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,122 @@
 .start-recipe-btn {
   bottom: 0;
   position: fixed;
+  background: #CE4444;
+  border-radius: 10px;
+  color: black;
+  height: 50px;
+  margin-top: 80px;
+  bottom: 10px;
+  width: 90%;
+}
+
+.details-main-image {
+  border-radius: 0;
+  height: 35vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.details-text-container {
+  /* border: 1px solid black; */
+  margin-bottom: 15vh;
+  padding: 15px;
+}
+
+.name-and-share {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid green; */
+  overflow: scroll;
+}
+
+.share-fav {
+  display: flex;
+  max-width: 20%;
+  align-items: flex-start;
+}
+
+.share-fav button {
+  margin: 0;
+  padding: 0;
+  /* text-align: center; */
+}
+
+.name-and-share .share-div {
+  display: flex;
+  align-items: flex-start;
+}
+
+.favorite-button-main {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.name-and-share-title {
+  max-width: 80%;
+}
+
+.name-and-share h1 {
+  margin: 0;
+}
+
+.details-cat {
+  /* border: 1px solid red; */
+  margin: 5px 0 10px 0;
+  text-align: left;
+  font-size: 20px;
+  color: rgb(169,169,169,1);
+}
+
+.details-ingredients {
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+  padding: 5px;
+  line-height: 20px;
+}
+
+.details-instructions {
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+  padding: 15px;
+  line-height: 20px;
+  margin-top: 0;
+}
+
+.details-subtitle {
+  margin: 30px 0 5px 0;
+  text-align: left;
+}
+
+.slick-next:before {
+  color: black;
+  top: 0;
+}
+
+.slick-prev:before {
+  color: black;
+}
+
+iframe {
+  border: none;
+}
+
+.recomendations {
+  margin-top: 25px;
+  padding: 0 30px;
+}
+
+.rec-card h4, h5 {
+  width: 100%;
+  margin: 0;
+}
+
+.rec-card {
+  padding: 0 10px;
+}
+
+.loader-main {
+  width: 100%;
+  text-align: center;
 }

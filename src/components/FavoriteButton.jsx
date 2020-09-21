@@ -15,17 +15,19 @@ const FavoriteButton = ({ recipe, id }) => {
     favoriteChecker(id, setFavoritado);
   }, [id]);
   return (
-    <button
-      onClick={() => {
-        toggleTrueFalse(favoritado, setFavoritado);
-        storeFavorites(favoritado, recipe);
-      }}
-    >
-      <img
-        data-testid="favorite-btn"
-        src={favoritado ? blackHeartIcon : whiteHeartIcon} alt="love"
-      />
-    </button>
+    <div className="favorite-button-main">
+      <button
+        onClick={() => {
+          toggleTrueFalse(favoritado, setFavoritado);
+          storeFavorites(favoritado, recipe);
+        }}
+      >
+        <img
+          data-testid="favorite-btn"
+          src={favoritado ? blackHeartIcon : whiteHeartIcon} alt="love"
+        />
+      </button>
+    </div>
   );
 };
 

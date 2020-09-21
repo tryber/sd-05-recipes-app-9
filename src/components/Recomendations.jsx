@@ -8,13 +8,13 @@ const Recomendations = ({ receitas, loading }) => {
   if (loading) return <div>Loading</div>;
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 2,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
   };
   return (
-    <div>
+    <div className="recomendations">
       <Slider {...settings}>
         {receitas.map((receita, index) => {
           const number = index;
