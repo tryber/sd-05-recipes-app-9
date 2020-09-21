@@ -90,7 +90,8 @@ const RecipeDetails = (props) => {
           data-testid="start-recipe-btn"
           disabled={isItDone(id)}
           onClick={() => toggleTrueFalse(redirectProgresso, setRedirectProgresso)}
-        >{isItInProgress(bemidas, id) ? 'Continuar Receita' : 'Começar Receita'}</button>
+        >{isItInProgress(bemidas, id) ? 'Continuar Receita' : 'Começar Receita'}
+        </button>
       </div>
     </div>
   );

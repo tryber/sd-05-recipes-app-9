@@ -5,9 +5,20 @@
   border-radius: 10px;
   color: black;
   height: 50px;
-  margin-top: 80px;
+  margin: auto;
   bottom: 10px;
-  width: 90%;
+  width: 93%;
+  left: 0;
+  right: 0;
+}
+
+.start-recipe-btn:disabled {
+  background: #cc7373;
+  color: #5e5353;
+}
+
+.start-recipe-btn-container {
+  border: 1px solid black;
 }
 
 .details-main-image {

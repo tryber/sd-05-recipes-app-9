@@ -22,7 +22,7 @@
   border: 1px solid #A9A9A9;
   border-radius: 5px;
   box-sizing: border-box;
-  height: 58px;
+  height: 50px;
   margin-bottom: 20px;
   outline: none;
   padding-left: 15px;
@@ -33,9 +33,9 @@
   background: #CE4444;
   border-radius: 10px;
   color: black;
-  height: 70px;
+  height: 58px;
   margin-top: 80px;
-  width: 90%;
+  width: 80%;
 }
 
 .login-button:disabled {

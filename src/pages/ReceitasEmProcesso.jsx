@@ -9,7 +9,8 @@ import { destravar } from '../actions/finishRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import { progressChecker } from '../services/localStorage';
-import '../components/receitasEmProcesso.css';
+// import '../components/receitasEmProcesso.css';
+import './ReceitasEmProcesso.css';
 
 const rota = (pathname) => {
   // cria um objeto com chaves dizendo o id, e se está na tela de comidas ou bebidas
@@ -57,34 +58,48 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
   const { ingredients, measures } = ingredientData;
   dispatch(destravar(shouldUnlock(ingredients, id, comidaOuBebida)));
   return (
-    <div>
-      <img data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
-      <h1 data-testid="recipe-title">{drinkOrFood}</h1>
-      <h2 data-testid="recipe-category">{category}</h2>
-      <ShareButton pathname={pathname} />
-      <FavoriteButton recipe={recipe} id={id} />
-      {ingredients.map((ingredient, index) => {
-        if (!ingredient || ingredient === '') return null;
-        const data = {
-          ingredient,
-          index,
-          measure: measures[index],
-          comidaOuBebida,
-          id,
-          onChange: () => shouldUnlock(ingredients, id, comidaOuBebida),
-          progresso: () => progressChecker(id, comidaOuBebida, `${ingredient}${index}`),
-        };
-        return <Checkbox key={`${ingredient}${Math.random()}`} data={data} />;
-      })}
-      <p data-testid="instructions" >{instructions}</p>
-      <ButtonFinish
-        data={{
-          redirecionar: () => setRedirect,
-          redirState: redirect,
-          recipe,
-          unlock: () => shouldUnlock(ingredients, id, comidaOuBebida),
-        }}
-      />
+    <div className="inprogress-main-container">
+      <img className="inprogress-main-image" data-testid="recipe-photo" src={recipeThumb} style={{ width: '100%' }} alt="receita" />
+      <div className="inprogress-text-container">
+        <div className="name-and-share">
+          <div className="name-and-share-title">
+            <h1 data-testid="recipe-title">{drinkOrFood}</h1>
+          </div>
+          <div className="share-fav">
+            <ShareButton pathname={pathname} />
+            <FavoriteButton recipe={recipe} id={id} />
+          </div>
+        </div>
+        <h2 className="inprogress-cat" data-testid="recipe-category">{category}</h2>
+        <h2 className="inprogress-subtitle">Ingredients</h2>
+        <div className="inprogress-ingredients">
+          {ingredients.map((ingredient, index) => {
+            if (!ingredient || ingredient === '') return null;
+            const data = {
+              ingredient,
+              index,
+              measure: measures[index],
+              comidaOuBebida,
+              id,
+              onChange: () => shouldUnlock(ingredients, id, comidaOuBebida),
+              progresso: () => progressChecker(id, comidaOuBebida, `${ingredient}${index}`),
+            };
+            return <Checkbox key={`${ingredient}${Math.random()}`} data={data} />;
+          })}
+        </div>
+        <h2 className="inprogress-subtitle">Ingredients</h2>
+        <p className="inprogress-instructions" data-testid="instructions" >{instructions}</p>
+        <div>
+          <ButtonFinish
+            data={{
+              redirecionar: () => setRedirect,
+              redirState: redirect,
+              recipe,
+              unlock: () => shouldUnlock(ingredients, id, comidaOuBebida),
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
