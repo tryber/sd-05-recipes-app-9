@@ -1,0 +1,25 @@
+.rec-card1 {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0,
+0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* height: 175px; */
+  margin: 10px;
+  padding: 0;
+}
+
+.rec-card1 img {
+  border-radius: 5px 5px 0 0;
+  /* height: 130px; */
+  width: 100%;
+}
+
+.rec-card1 h5 {
+  color: rgb(163, 160, 160);
+  margin: 2px 0;
+}
+
+.rec-card1 h4 {
+  font-weight: lighter;
+  font-size: 15px;
+  padding-bottom: 5px;
+}

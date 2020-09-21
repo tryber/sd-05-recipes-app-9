@@ -53,12 +53,14 @@ span {
   color:rgb(121, 118, 121);
 }
 
-h4 {
+.fav-name {
   font-size: 100%;
   font-weight: normal;
-  max-height: 50px;
-  width: 200%;
-  overflow: scroll;
+  max-height: 200px;
+  /* width: 200%; */
+  width: 150px;
+  /* max-width: 100%; */
+  /* overflow: scroll; */
 }
 
 .share-unlike {

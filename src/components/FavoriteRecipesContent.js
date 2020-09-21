@@ -54,7 +54,7 @@ const Card = (props) => {
       <div className="right">
         <span data-testid={`${index}-horizontal-top-text`}>{ (item.type === 'comida') ? `${item.area} - ${item.category}` : item.alcoholicOrNot }</span>
         <Link to={`${item.type}s/${item.id}`}>
-          <h4 data-testid={`${index}-horizontal-name`}>{item.name}</h4>
+          <h4 className="fav-name" data-testid={`${index}-horizontal-name`}>{item.name}</h4>
         </Link>
         <div className="share-unlike">
           <button id={`share-btn-${item.id}`} onClick={handleClickShare}>

@@ -39,7 +39,7 @@ const ButtonFinish = ({ data, finalizar }) => {
         salvarReceita(recipe.localStorage);
       }}
     >
-      Finalizar receita
+      Let's eat!
     </button>
   );
 };

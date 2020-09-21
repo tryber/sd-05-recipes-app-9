@@ -11,6 +11,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import { progressChecker } from '../services/localStorage';
 // import '../components/receitasEmProcesso.css';
 import './ReceitasEmProcesso.css';
+import loader from '../images/loader1.gif';
 
 const rota = (pathname) => {
   // cria um objeto com chaves dizendo o id, e se está na tela de comidas ou bebidas
@@ -52,7 +53,7 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
     const receitaDetalhada = recipeDetailsThunk(comidaOuBebida, id);
     dispatch(receitaDetalhada);
   }, [dispatch, id, comidaOuBebida]);
-  if (carregando) return <p>Loading</p>;
+  if (carregando) return <div className="loader-main"><img className="loader" alt="loader" src={loader} /></div>;
   if (redirect) return <Redirect to="/receitas-feitas" />;
   const { recipeThumb, drinkOrFood, category, ingredientData, instructions } = recipe;
   const { ingredients, measures } = ingredientData;
