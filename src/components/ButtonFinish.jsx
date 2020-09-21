@@ -9,7 +9,9 @@ const toggleTrueFalse = (bool, setTrueFalse) => setTrueFalse(!bool);
 const salvarReceita = (receita) => {
   /* salva as receitas prontas quando o usuario clica no botão finalizar receita*/
   const receitaAtual = receita;
-  const data = JSON.stringify(new Date());
+  let data = JSON.stringify(new Date()).split('T')[0].split('-');
+  const ano = data[0].split('"');
+  data = `${data[2]}/${data[1]}/${ano[1]}`;
   receitaAtual.doneDate = data;
   let doneRecipes = localStorage.getItem('doneRecipes');
   if (doneRecipes) {

@@ -71,7 +71,7 @@ button:hover {
   background-color: white;
   border-bottom: 1px solid rgb(242, 242, 242);
   display: flex;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   height: 56px;
   justify-content: space-between;
 }

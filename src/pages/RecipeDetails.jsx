@@ -81,10 +81,10 @@ const RecipeDetails = (props) => {
         </div>
         <h2 className="details-subtitle">Instructions</h2>
         <p className="details-instructions" data-testid="instructions" >{instructions}</p>
-        <h2 className="details-subtitle">Video</h2>
+        {(video) && <h2 className="details-subtitle">Video</h2>}
         {(video) && videoEmbeder(video)}
         <h2 className="details-subtitle">Recomendations</h2>
-        <Recomedations />
+        <Recomedations data={{id, bemidas}} />
         <button
           className="start-recipe-btn"
           data-testid="start-recipe-btn"
