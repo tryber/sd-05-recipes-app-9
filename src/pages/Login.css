@@ -42,3 +42,11 @@
   background: #cc7373;
   color: #5e5353;
 }
+
+.login--main-container img {
+  border-radius: 50%;
+  position: absolute;
+  height: 25vh;
+  width: 40vw;
+  top: 7vh;
+}

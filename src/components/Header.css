@@ -4,7 +4,7 @@
 }
 
 .search-input {
-  border: 1px solid rgb(242, 242, 242);
+  border: 1px solid rgb(202, 198, 198);
   border-radius: 5px 0 0 5px;
   font-size: 18px;
   height: 30px;
@@ -32,9 +32,12 @@
 }
 
 .search-div {
-  width: 10%;
+  width: 12%;
 }
 
+.search-div button {
+  background-color: transparent;
+}
 
 .withoutSelector {
   transform: scale(1.3);
@@ -68,7 +71,7 @@ button:hover {
 
 .topo {
   align-items: center;
-  background-color: white;
+  background-color: rgb(242, 242, 242);
   border-bottom: 1px solid rgb(242, 242, 242);
   display: flex;
   /* margin-bottom: 15px; */

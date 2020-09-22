@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import './Login.css';
+import logo from '../images/logo.png';
 
 const disabledStatus = (email, senha) => {
   const valido = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{3})$/i);
@@ -35,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="login--main-container">
-      {/* <h1>Faça Login</h1> */}
+      <img src={logo} alt="logo" />
       <div className="login--inputs-button">
         <input
           type="text"

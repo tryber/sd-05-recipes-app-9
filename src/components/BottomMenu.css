@@ -1,5 +1,5 @@
 .menu {
-  background-color: white;
+  background-color: rgb(242, 242, 242);
   display: flex;
   position: fixed;
   bottom: 0;
@@ -13,9 +13,11 @@
 }
 
 img {
+  background-color: transparent;
   width: 110%;
 }
 
 .menu button {
   outline: none;
+  background-color: transparent;
 }

@@ -88,7 +88,7 @@ const ReceitasEmProcesso = ({ recipe, carregando, location: { pathname } }) => {
             return <Checkbox key={`${ingredient}${Math.random()}`} data={data} />;
           })}
         </div>
-        <h2 className="inprogress-subtitle">Ingredients</h2>
+        <h2 className="inprogress-subtitle">Instructions</h2>
         <p className="inprogress-instructions" data-testid="instructions" >{instructions}</p>
         <div>
           <ButtonFinish
